@@ -1,0 +1,41 @@
+//bootstrap의 변수 재정의, 스타일 추가, 수정하기
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$primary: #20bccc;
+$navy: #05438a;
+$secondary: #4b6db4;
+$bs-btn-color: #ffffff;
+
+* {
+  font-family: "S-CoreDream-3Light";
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+
+th {
+  text-align: center;
+}
+
+.bg-navy {
+  background-color: $navy;
+}
+
+//Container breakpoint 재정의
+$container-max-widths: (
+  // sm: 540px,
+  // md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// Bootstrap 임포트
+@import "~bootstrap/scss/bootstrap";

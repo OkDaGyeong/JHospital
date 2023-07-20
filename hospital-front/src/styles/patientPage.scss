@@ -1,0 +1,18 @@
+$grey: #F1F2F7;
+
+.patient-table {
+  tbody tr th {
+    text-align: center;
+    background-color: $grey;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .patient-table {
+    th {
+      display: none;
+    }
+
+  }
+}
