@@ -23,7 +23,7 @@ function Patient() {
   return (
     <div style={{ backgroundColor: "white", width: "100vw", height: "100vh" }}>
       <Header />
-      <Container>
+      <Container style={{ backgroundColor: "white" }}>
         <div>
           <h3 style={{ marginTop: "20px" }}>환자 기본 정보</h3>
           <Table bordered responsive className="patient-table">
