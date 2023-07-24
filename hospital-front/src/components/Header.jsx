@@ -4,6 +4,10 @@ import { Navbar, Container, Button } from "react-bootstrap";
 import LogoImg from "../images/logoWhite.png";
 import LogoIcon from "../images/logoIcon.png";
 
+import { useNavigate } from "react-router-dom";
+
+import { FiLogOut } from "react-icons/fi";
+
 function Header() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -20,6 +24,7 @@ function Header() {
     };
   }, []);
 
+  const navigate = useNavigate();
   return (
     <Navbar className="bg-navy">
       <Container className="bg-navy">
@@ -39,7 +44,22 @@ function Header() {
           </span>
         </Navbar.Brand>
 
-        {isSmallScreen ? <Button>logout</Button> : ""}
+        {isSmallScreen ? (
+          <Button
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+            }}
+            className="text-white"
+            onClick={(e) => {
+              navigate("/");
+            }}
+          >
+            <FiLogOut />
+          </Button>
+        ) : (
+          ""
+        )}
       </Container>
     </Navbar>
   );

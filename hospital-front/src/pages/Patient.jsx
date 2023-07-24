@@ -5,21 +5,12 @@ import { Button, Table, Tabs, Tab } from "react-bootstrap";
 import "../styles/patientPage.scss";
 import { Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css"; // DatePicker의 기본 스타일을 import
-
+import DatePickerCustom from "../components/DatePicker";
+import Tab2 from "../containers/Tab2";
 function Patient() {
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(new Date());
-  const datePickerStyle = {
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    padding: "8px",
-    color: "#333",
-    float: "right",
-    // ... other desired styles
-  };
+
   return (
     <div style={{ backgroundColor: "white", width: "100vw", height: "100vh" }}>
       <Header />
@@ -59,13 +50,6 @@ function Patient() {
         </div>
         <hr />
 
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          // includeDates={[new Date(), addDays(new Date(), 1)]}
-          placeholderText="This only includes today and tomorrow"
-          style={datePickerStyle} // 인라인 스타일로 지정
-        />
         <div>
           <Tabs
             defaultActiveKey="pState"
@@ -76,7 +60,9 @@ function Patient() {
               환자 상태
             </Tab>
             <Tab eventKey="prescription" title="처방내역">
-              처방 내역
+              {/* 처방 내역 */}
+              <DatePickerCustom />
+              <Tab2 />
             </Tab>
             <Tab eventKey="inspection" title="검사결과">
               검사결과

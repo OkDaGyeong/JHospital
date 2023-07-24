@@ -23,3 +23,21 @@ $grey: #F1F2F7;
 
   }
 }
+
+
+#order-list-table {
+  text-align: center;
+  width: 1200px;
+
+
+  thead tr th.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: $grey;
+  }
+
+  tbody {
+    height: 100px;
+  }
+}
