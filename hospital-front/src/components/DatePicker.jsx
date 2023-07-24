@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // DatePicker의 기본 스타일을 import
-import BreadcrumbsDropdown from "./BreadcrumbsDropdown";
+
 function DatePickerCustom() {
   const [startDate, setStartDate] = useState(new Date());
   const datePickerStyle = {
@@ -16,11 +16,10 @@ function DatePickerCustom() {
     <div
       style={{
         display: "flex",
-        // flexDirection: "row-reverse",
+        flexDirection: "row-reverse",
         margin: "15px 0",
       }}
     >
-      <BreadcrumbsDropdown />
       <DatePicker
         selected={startDate}
         onChange={(date) => setStartDate(date)}

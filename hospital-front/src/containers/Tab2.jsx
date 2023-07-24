@@ -19,44 +19,28 @@ function Tab2({
   comment, //비고?
 }) {
   return (
-    <>
+    <div className="table-container">
       <Table id="order-list-table" bordered responsive hover>
-        <thead>
+        <thead className="sticky-thead">
           <tr>
-            <th className="sticky-header">처방</th>
-            <th className="sticky-header">구분</th>
-            <th className="sticky-header">코드</th>
-            <th className="sticky-header">처방명</th>
-            <th className="sticky-header">용량</th>
-            <th className="sticky-header">수</th>
-            <th className="sticky-header">횟</th>
-            <th className="sticky-header">일</th>
-            <th className="sticky-header">P</th>
-            <th className="sticky-header">투</th>
-            <th className="sticky-header">용법/검체</th>
-            <th className="sticky-header">급</th>
-            <th className="sticky-header">MG</th>
-            <th className="sticky-header">비고</th>
+            <th>처방</th>
+            <th>구분</th>
+            <th>코드</th>
+            <th>처방명</th>
+            <th>용량</th>
+            <th>수</th>
+            <th>횟</th>
+            <th>일</th>
+            <th>P</th>
+            <th>투</th>
+            <th>용법/검체</th>
+            <th>급</th>
+            <th>MG</th>
+            <th>비고</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>RC</td>
-            <td>내복</td>
-            <td>CTHRB90</td>
-            <td>HERBEN SR TAB 90MG/1정 </td>
-            <td></td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td></td>
-            <td>PO</td>
-            <td>P0010</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          {Array.from({ length: 14 }).map((_, index) => (
+          {Array.from({ length: 50 }).map((_, index) => (
             <tr key={index}>
               <td>RC</td>
               <td>내복</td>
@@ -90,7 +74,7 @@ function Tab2({
           ))}
         </tbody>
       </Table>
-    </>
+    </div>
   );
 }
 

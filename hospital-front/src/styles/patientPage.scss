@@ -1,4 +1,4 @@
-$grey: #F1F2F7;
+$grey: #f1f2f7;
 
 .patient-table {
   tbody tr {
@@ -10,9 +10,7 @@ $grey: #F1F2F7;
     td {
       text-align: center;
     }
-
   }
-
 }
 
 @media (max-width: 500px) {
@@ -20,24 +18,65 @@ $grey: #F1F2F7;
     th {
       display: none;
     }
-
   }
 }
 
+.table-container {
+  height: 800px; /* Set the desired height for the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.sticky-thead {
+  position: sticky;
+  top: 0;
+  background-color: #f1f2f7;
+  z-index: 1;
+}
 
 #order-list-table {
   text-align: center;
   width: 1200px;
 
-
-  thead tr th.sticky-header {
-    position: sticky;
-    top: 0;
-    z-index: 1;
+  thead tr th {
     background-color: $grey;
   }
+}
 
-  tbody {
-    height: 100px;
+.sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar {
+  background-color: #f7f7f7;
+  padding-top: 1rem;
+}
+
+.main-content {
+  padding-left: 1rem;
+}
+
+@media (min-width: 768px) {
+  .sidebar-wrapper {
+    flex-direction: row;
   }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px; /* 원하는 사이드바 너비로 설정 */
+  }
+
+  .main-content {
+    margin-left: 200px; /* 사이드바 너비만큼 컨텐츠를 우측으로 밀어줍니다. */
+  }
+}
+
+.menu-title {
+  font-weight: 600;
+  margin: 10px 0;
+  display: block;
+
+  // border-top: 1px solid #ccc;
 }

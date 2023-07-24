@@ -3,11 +3,12 @@ import Header from "../components/Header";
 import { Container } from "react-bootstrap";
 import { Button, Table, Tabs, Tab } from "react-bootstrap";
 import "../styles/patientPage.scss";
-import { Stack } from "react-bootstrap";
+
 import { useNavigate } from "react-router-dom";
 
 import DatePickerCustom from "../components/DatePicker";
 import Tab2 from "../containers/Tab2";
+import SidebarMenu from "../components/SidebarMenu";
 function Patient() {
   const navigate = useNavigate();
 
@@ -51,6 +52,7 @@ function Patient() {
         <hr />
 
         <div>
+          <DatePickerCustom />
           <Tabs
             defaultActiveKey="pState"
             id="uncontrolled-tab-example"
@@ -61,8 +63,9 @@ function Patient() {
             </Tab>
             <Tab eventKey="prescription" title="처방내역">
               {/* 처방 내역 */}
-              <DatePickerCustom />
-              <Tab2 />
+
+              <SidebarMenu />
+              {/* <Tab2 /> */}
             </Tab>
             <Tab eventKey="inspection" title="검사결과">
               검사결과
@@ -73,7 +76,15 @@ function Patient() {
           </Tabs>
         </div>
 
-        <div id="b-btn">
+        <div
+          id="b-btn"
+          style={{
+            margin: "20px",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
           <Button
             className="text-white"
             onClick={(e) => navigate("/patient-list")}
