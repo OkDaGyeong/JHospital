@@ -1,9 +1,16 @@
 $grey: #F1F2F7;
 
 .patient-table {
-  tbody tr th {
-    text-align: center;
-    background-color: $grey;
+  tbody tr {
+    th {
+      text-align: center;
+      background-color: $grey;
+    }
+
+    td {
+      text-align: center;
+    }
+
   }
 
 }

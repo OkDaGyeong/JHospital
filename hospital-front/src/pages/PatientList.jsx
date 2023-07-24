@@ -6,7 +6,7 @@ function PatientList() {
   return (
     <>
       <Header />
-      <Container>
+      <Container style={{ backgroundColor: "#F1F2F7" }}>
         <PatientsContainer />
       </Container>
     </>
