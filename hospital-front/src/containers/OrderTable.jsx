@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import "../styles/patientPage.scss";
 
-function Tab2({
+function OrderTable({
   order, //처방
   division, //구분
   recipe, //코드
@@ -78,4 +78,4 @@ function Tab2({
   );
 }
 
-export default Tab2;
+export default OrderTable;

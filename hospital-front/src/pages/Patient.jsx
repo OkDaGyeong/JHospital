@@ -7,7 +7,7 @@ import "../styles/patientPage.scss";
 import { useNavigate } from "react-router-dom";
 
 import DatePickerCustom from "../components/DatePicker";
-import Tab2 from "../containers/Tab2";
+import OrderTable from "../containers/OrderTable";
 import SidebarMenu from "../components/SidebarMenu";
 function Patient() {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ function Patient() {
               {/* 처방 내역 */}
 
               <SidebarMenu />
-              {/* <Tab2 /> */}
+              {/* <OrderTable /> */}
             </Tab>
             <Tab eventKey="inspection" title="검사결과">
               검사결과

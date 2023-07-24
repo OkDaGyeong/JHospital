@@ -4,7 +4,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 
-import Tab2 from "../containers/Tab2";
+import OrderTable from "../containers/OrderTable";
 import "../styles/patientPage.scss";
 
 import {
@@ -113,40 +113,40 @@ function SidebarMenu() {
           <Col style={{ overflow: "hidden" }}>
             <Tab.Content>
               <Tab.Pane eventKey="#medicine1">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#medicine2">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#injection">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#exam1">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#exam2">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#exam3">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging1">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging2">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging3">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging4">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#physical">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
               <Tab.Pane eventKey="#other">
-                <Tab2 />
+                <OrderTable />
               </Tab.Pane>
             </Tab.Content>
           </Col>
