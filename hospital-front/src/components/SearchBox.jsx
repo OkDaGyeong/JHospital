@@ -1,35 +1,29 @@
 import React from "react";
-import { Form, Button, InputGroup, Stack } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  InputGroup,
+  Stack,
+  FloatingLabel,
+} from "react-bootstrap";
 import "../styles/patientListPage.scss";
 
 function SearchBox() {
   return (
     <>
-      <Form id="search-box">
+      <Form id="search-box" className="card">
         <Stack direction="horizontal" className="search-title mb-3">
           <h4 style={{ margin: 0 }}>환자 정보 검색</h4>
-          <Button size="sm">검색</Button>
+          <Button size="sm" className="text-white">
+            검색
+          </Button>
         </Stack>
-        <Stack direction="horizontal" gap={3}>
-          <InputGroup>
-            <InputGroup.Text id="inputGroup-sizing-default">
-              의사코드
-            </InputGroup.Text>
-            <Form.Control
-              aria-label="Default"
-              aria-describedby="inputGroup-sizing-default"
-            />
-          </InputGroup>
-          <InputGroup>
-            <InputGroup.Text id="inputGroup-sizing-default">
-              환자명
-            </InputGroup.Text>
-            <Form.Control
-              aria-label="Default"
-              aria-describedby="inputGroup-sizing-default"
-            />
-          </InputGroup>
-          <Form.Select aria-label="Default select example">
+        <Stack direction="horizontal" gap={3} id="search-input-box">
+          <Form.Control type="text" placeholder="의료진 코드" />
+
+          <Form.Control type="text" placeholder="환자명" />
+
+          <Form.Select>
             <option>병동선택</option>
             <option value="31">31병동</option>
             <option value="51">51병동</option>

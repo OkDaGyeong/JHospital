@@ -88,7 +88,10 @@ function Patient() {
         </div>
 
         <div id="b-btn">
-          <Button color={"blue"} onClick={(e) => navigate("/patient-list")}>
+          <Button
+            className="text-white"
+            onClick={(e) => navigate("/patient-list")}
+          >
             뒤로가기
           </Button>
         </div>

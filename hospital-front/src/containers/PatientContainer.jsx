@@ -10,10 +10,20 @@ function PatientContainer() {
   const navigate = useNavigate();
   return (
     <>
-      <Stack direction="horizontal" gap={3}>
+      <Stack
+        direction="horizontal"
+        gap={3}
+        style={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap-reverse",
+          padding: "25px 0",
+        }}
+      >
         <SearchBox />
         <UserBox doctor="조정현" department="IM" />
       </Stack>
+
       <InfoBox
         ward="31"
         room="326"
