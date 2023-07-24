@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Form,
-  Button,
-  InputGroup,
-  Stack,
-  FloatingLabel,
-} from "react-bootstrap";
+import { Form, Button, Stack } from "react-bootstrap";
 import "../styles/patientListPage.scss";
 
 function SearchBox() {
