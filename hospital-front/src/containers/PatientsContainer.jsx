@@ -14,7 +14,7 @@ function PatientsContainer() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const doctorName = useSelector((state) => state.auth.username);
-
+  const employeeno = useSelector((state) => state.auth.employeeno);
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 560);
@@ -41,7 +41,11 @@ function PatientsContainer() {
         }}
       >
         <SearchBox />
-        {isSmallScreen ? "" : <UserBox doctor={doctorName} department="IM" />}
+        {isSmallScreen ? (
+          ""
+        ) : (
+          <UserBox doctor={doctorName} employeeno={employeeno} />
+        )}
       </Stack>
 
       {Array.from({ length: 12 }).map((_, index) => (

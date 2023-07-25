@@ -5,7 +5,7 @@ import profileImg from "../images/doctor.png";
 import { useNavigate } from "react-router-dom";
 import { logoutSuccess } from "../modules/auth";
 import { useDispatch } from "react-redux";
-function UserBox({ doctor, department }) {
+function UserBox({ doctor, employeeno }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,12 +20,12 @@ function UserBox({ doctor, department }) {
           <Image
             src={profileImg}
             roundedCircle
-            style={{ width: "60px", height: "60px" }}
+            style={{ width: "40px", height: "40px" }}
           />
           <Stack gap={2}>
-            <h4 style={{ margin: 0 }}>
-              {department}　{doctor}
-            </h4>
+            <h5 style={{ margin: 0 }}>
+              {doctor} ({employeeno}){/* {department}　{doctor} */}
+            </h5>
 
             <Button
               variant="outline-primary"
