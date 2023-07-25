@@ -43,11 +43,12 @@ function InfoBox({
         <Card.Body>
           <Row>
             <Col>NO.{pNum}</Col>
-            <Col>
-              {department}　　{doctor}
+            <Col>{department}</Col>
+            <Col>{doctor}</Col>
+            <Col className="longtext-box">{insurance}</Col>
+            <Col xs={4} className="longtext-box">
+              {diagnostic}
             </Col>
-            <Col>{insurance}</Col>
-            <Col xs={5}>{diagnostic}</Col>
           </Row>
         </Card.Body>
       </Card>

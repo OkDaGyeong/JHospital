@@ -21,11 +21,19 @@ $navy: #05438a;
 #search-box {
   flex-grow: 8;
   margin: 0;
+
 }
 
 #user-box {
   // flex-grow: 1;
   flex-basis: 250px;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    font-size: 13px;
+    padding: 4px 12px;
+  }
 }
 
 #search-input-box {
@@ -56,4 +64,21 @@ select {
 #user-box .btn-logout:focus {
   color: white;
   /* 원하는 글자색으로 변경합니다. */
+}
+
+.card {
+  border: none
+}
+
+.card-header {
+  // border-bottom: 1px solid rgba(33, 37, 41, 0.03);
+  border-bottom: none;
+}
+
+.longtext-box {
+  // width: 200px;
+  /* 예시로 컨테이너의 넓이를 200px로 설정 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

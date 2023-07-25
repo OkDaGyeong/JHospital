@@ -6,8 +6,14 @@ import SearchBox from "../components/SearchBox";
 import { Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
 function PatientsContainer() {
+  const navigate = useNavigate();
+
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  const doctorName = useSelector((state) => state.auth.username);
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,7 +28,6 @@ function PatientsContainer() {
     };
   }, []);
 
-  const navigate = useNavigate();
   return (
     <>
       <Stack
@@ -30,17 +35,18 @@ function PatientsContainer() {
         gap={3}
         style={{
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "stretch",
           // flexWrap: "wrap-reverse",
           padding: "25px 0",
         }}
       >
         <SearchBox />
-        {isSmallScreen ? "" : <UserBox doctor="조정현" department="IM" />}
+        {isSmallScreen ? "" : <UserBox doctor={doctorName} department="IM" />}
       </Stack>
 
       {Array.from({ length: 12 }).map((_, index) => (
         <InfoBox
+          key={index}
           ward="31"
           room={"31" + index}
           pName="김윤임"
@@ -49,11 +55,11 @@ function PatientsContainer() {
           date="2023.07.11"
           pNum="08033373"
           department="IM"
-          doctor="조정현"
+          doctor={doctorName}
           insurance="건보"
           diagnostic="부위가 명시되지 않은 요로감염"
           onSelect={(e) => {
-            navigate("/patient/123");
+            navigate("/patient/" + index);
           }}
         />
       ))}

@@ -18,33 +18,47 @@ function InfoTable({
 }) {
   return (
     <>
-      <Table responsive>
-        <thead>
-          <tr>
-            <th>#</th>
-            {Array.from({ length: 12 }).map((_, index) => (
-              <th key={index}>Table heading</th>
-            ))}
-          </tr>
-        </thead>
+      <h3 style={{ marginTop: "20px" }}>환자 기본 정보</h3>
+      <Table bordered responsive className="patient-table">
         <tbody>
           <tr>
-            <td>1</td>
-            {Array.from({ length: 12 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
-            ))}
+            <th>차트번호</th>
+            <td>{pNum}123123</td>
+            <th>병동/병실</th>
+            <td>
+              {ward}
+              {room}51/5101
+            </td>
+            <th>환자명</th>
+            <td>{pName}홍길동</td>
+            <th>나이/성별</th>
+            <td>
+              {age}
+              {gender}44/남
+            </td>
           </tr>
           <tr>
-            <td>2</td>
-            {Array.from({ length: 12 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
-            ))}
+            <th>진료과</th>
+            <td>{department}OS</td>
+            <th>진료의</th>
+            <td>{doctor}ㅇㅇㅇ</td>
+            <th>입원일자</th>
+            <td>{date}2023-02-23</td>
+            <th>비고</th>
+            <td>i,l</td>
           </tr>
           <tr>
-            <td>3</td>
-            {Array.from({ length: 12 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
-            ))}
+            <th>보험유형</th>
+            <td>{insurance}건강보험</td>
+            <th>진단명</th>
+            <td
+              colSpan={6}
+              style={{
+                textAlign: "left",
+              }}
+            >
+              {diagnostic}부위가 명시되지 않은 요로감염
+            </td>
           </tr>
         </tbody>
       </Table>

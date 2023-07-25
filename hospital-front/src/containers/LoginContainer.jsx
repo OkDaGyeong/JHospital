@@ -5,7 +5,9 @@ import LoginForm from "../components/LoginForm";
 import "../styles/loginPage.scss";
 import LogoImg from "../images/logoBlack.png";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../modules/auth";
+
 // import { login } from "../modules/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +20,10 @@ function LoginContainer() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false); // 로그인 에러 상태 추가
-  // const loginError = useSelector((state) => state.auth.error);
+
+  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  // const username = useSelector((state) => state.auth.username);
+  // const employeeno = useSelector((state) => state.auth.employeeno);
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -45,7 +50,12 @@ function LoginContainer() {
         console.log(obj.id);
         console.log(obj.password);
         if (response.data !== "error") {
-          navigate("/patient-list");
+          const user = {
+            username: response.data.id,
+            employeeno: response.data.employeeno,
+          };
+          dispatch(loginSuccess(user));
+          navigate("/patient-list/" + response.data.employeeno);
         } else {
           setLoginError(true);
         }

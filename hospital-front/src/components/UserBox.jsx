@@ -3,8 +3,16 @@ import { Button, Image, Stack, Card } from "react-bootstrap";
 import "../styles/patientListPage.scss";
 import profileImg from "../images/doctor.png";
 import { useNavigate } from "react-router-dom";
+import { logoutSuccess } from "../modules/auth";
+import { useDispatch } from "react-redux";
 function UserBox({ doctor, department }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess());
+    navigate("/");
+  };
   return (
     <>
       <Card id="user-box">
@@ -23,7 +31,7 @@ function UserBox({ doctor, department }) {
               variant="outline-primary"
               className="fullWidth btn-logout"
               onClick={(e) => {
-                navigate("/");
+                handleLogout();
               }}
             >
               로그아웃

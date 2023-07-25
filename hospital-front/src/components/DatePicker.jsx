@@ -1,34 +1,50 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // DatePicker의 기본 스타일을 import
+// YourComponent.jsx
 
-function DatePickerCustom() {
+import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"; // React Datepicker CSS
+import ko from "date-fns/locale/ko";
+
+import { Button } from "react-bootstrap";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+
+import "../styles/datepicker.scss";
+const DatePickerCustom = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const datePickerStyle = {
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    padding: "8px",
-    color: "#333",
-    // ... other desired styles
-  };
 
   return (
     <div
       style={{
         display: "flex",
+        width: "100%",
         flexDirection: "row-reverse",
-        margin: "15px 0",
+        gap: "10px",
       }}
     >
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        // includeDates={[new Date(), addDays(new Date(), 1)]}
-        placeholderText="This only includes today and tomorrow"
-        style={datePickerStyle} // 인라인 스타일로 지정
-      />
+      {/* <Button variant="outline-secondary" size="sm">
+        <AiFillCaretRight />
+      </Button> */}
+      <button id="btn-preDate">
+        <AiFillCaretRight />
+      </button>
+      <div style={{ width: "120px" }}>
+        <DatePicker
+          style={{ width: "150px" }}
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          dateFormat="yyyy/MM/dd"
+          className="form-control datepick secondary"
+          locale={ko}
+        />
+      </div>
+      {/* <Button variant="outline-secondary" size="sm">
+        <AiFillCaretLeft />
+      </Button> */}
+      <button id="btn-nextDate">
+        <AiFillCaretLeft />
+      </button>
     </div>
   );
-}
+};
 
 export default DatePickerCustom;

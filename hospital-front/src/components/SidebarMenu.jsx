@@ -21,7 +21,7 @@ function SidebarMenu() {
     <>
       <Tab.Container
         id="order-tab"
-        defaultActiveKey="#medicine1"
+        defaultActiveKey="#all"
         style={{ width: "100%" }}
       >
         <Row style={{ flexWrap: "nowrap" }}>
@@ -112,6 +112,9 @@ function SidebarMenu() {
           </Col>
           <Col style={{ overflow: "hidden" }}>
             <Tab.Content>
+              <Tab.Pane eventKey="#all">
+                <OrderTable />
+              </Tab.Pane>
               <Tab.Pane eventKey="#medicine1">
                 <OrderTable />
               </Tab.Pane>
