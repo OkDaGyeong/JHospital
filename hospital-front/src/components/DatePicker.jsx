@@ -1,5 +1,3 @@
-// YourComponent.jsx
-
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // React Datepicker CSS
@@ -11,6 +9,18 @@ import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import "../styles/datepicker.scss";
 const DatePickerCustom = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const systemDate = new Date(); // 시스템 날짜
+  const handleNextDate = () => {
+    const nextDate = new Date(startDate);
+    nextDate.setDate(startDate.getDate() + 1);
+    setStartDate(nextDate);
+  };
+
+  const handlePreviousDate = () => {
+    const previousDate = new Date(startDate);
+    previousDate.setDate(startDate.getDate() - 1);
+    setStartDate(previousDate);
+  };
 
   return (
     <div
@@ -21,10 +31,7 @@ const DatePickerCustom = () => {
         gap: "10px",
       }}
     >
-      {/* <Button variant="outline-secondary" size="sm">
-        <AiFillCaretRight />
-      </Button> */}
-      <button id="btn-preDate">
+      <button id="btn-preDate" onClick={handleNextDate}>
         <AiFillCaretRight />
       </button>
       <div style={{ width: "120px" }}>
@@ -35,12 +42,11 @@ const DatePickerCustom = () => {
           dateFormat="yyyy/MM/dd"
           className="form-control datepick secondary"
           locale={ko}
+          maxDate={systemDate}
         />
       </div>
-      {/* <Button variant="outline-secondary" size="sm">
-        <AiFillCaretLeft />
-      </Button> */}
-      <button id="btn-nextDate">
+
+      <button id="btn-nextDate" onClick={handlePreviousDate}>
         <AiFillCaretLeft />
       </button>
     </div>
