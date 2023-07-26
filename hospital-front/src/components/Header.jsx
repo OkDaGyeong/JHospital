@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 import { FiLogOut } from "react-icons/fi";
 
+import { useDispatch } from "react-redux";
+import { logoutSuccess } from "../modules/auth";
 function Header() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 560);
@@ -29,7 +31,7 @@ function Header() {
     <Navbar className="bg-navy">
       <Container className="bg-navy">
         <Navbar.Brand
-          href="/patient-list"
+          href="/"
           style={{ display: "flex", alignItems: "center" }}
         >
           <img
@@ -52,6 +54,7 @@ function Header() {
             }}
             className="text-white"
             onClick={(e) => {
+              dispatch(logoutSuccess());
               navigate("/");
             }}
           >
