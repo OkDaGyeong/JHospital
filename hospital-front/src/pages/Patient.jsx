@@ -10,7 +10,7 @@ import DatePickerCustom from "../components/DatePicker";
 import OrderTable from "../containers/OrderTable";
 import InfoTable from "../components/InfoTable";
 import SidebarMenu from "../components/SidebarMenu";
-
+import ResultSidebar from "../components/ResultSidebar";
 // import Tab1 from "../containers/Tab1";
 function Patient() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function Patient() {
               {/* <OrderTable /> */}
             </Tab>
             <Tab eventKey="inspection" title="검사결과">
-              검사결과
+              <ResultSidebar />
             </Tab>
             <Tab eventKey="reading" title="판독결과">
               판독결과

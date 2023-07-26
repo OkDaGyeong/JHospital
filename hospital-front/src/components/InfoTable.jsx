@@ -45,7 +45,7 @@ function InfoTable({
             <th>입원일자</th>
             <td>{date}2023-02-23</td>
             <th>비고</th>
-            <td>i,l</td>
+            <td>{}i,l</td>
           </tr>
           <tr>
             <th>보험유형</th>
