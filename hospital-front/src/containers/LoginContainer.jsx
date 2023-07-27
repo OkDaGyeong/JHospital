@@ -42,7 +42,10 @@ function LoginContainer() {
   const handleLogin = () => {
     // 로그인 요청을 서버에 보냅니다.
     axios
-      .post("/viewUser/login", { id: id, password: password })
+      .post("/viewUser/login", {
+        id: id,
+        password: password,
+      })
       .then((response) => {
         setLoginError(false);
         console.log(response);

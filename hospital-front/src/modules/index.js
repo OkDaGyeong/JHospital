@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
-// import counterSlice from "./counterSlice";
+
 import auth from "./auth";
+import search from "./search";
 const rootReducer = combineReducers({
   auth,
-  // counterSlice,
+  search,
 });
 export default rootReducer;
 

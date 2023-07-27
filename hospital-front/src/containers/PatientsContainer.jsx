@@ -8,13 +8,15 @@ import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
+import axios from "axios";
 function PatientsContainer() {
   const navigate = useNavigate();
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [patients, setPatients] = useState([]);
 
   const doctorName = useSelector((state) => state.auth.username);
-  const employeeno = useSelector((state) => state.auth.employeeno);
+  const username = useSelector((state) => state.auth.employeeno);
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 560);
@@ -28,6 +30,27 @@ function PatientsContainer() {
     };
   }, []);
 
+  const { employeeno, patient, ward } = useSelector((state) => state.search);
+  const handleSearch = () => {
+    axios
+      .get("/patient/list", {
+        params: {
+          employeeNo: employeeno,
+          patientName: patient,
+          ward: ward,
+        },
+      })
+      .then((response) => {
+        setPatients(response.data);
+      })
+      .catch((error) => {
+        console.error("환자목록 오류", error);
+      });
+    console.log("employeeNo:", employeeno);
+    console.log("patientName:", patient);
+    console.log("ward:", ward);
+  };
+
   return (
     <>
       <Stack
@@ -40,11 +63,11 @@ function PatientsContainer() {
           padding: "25px 0",
         }}
       >
-        <SearchBox />
+        <SearchBox handleSearch={handleSearch} />
         {isSmallScreen ? (
           ""
         ) : (
-          <UserBox doctor={doctorName} employeeno={employeeno} />
+          <UserBox doctor={doctorName} employeeno={username} />
         )}
       </Stack>
 
