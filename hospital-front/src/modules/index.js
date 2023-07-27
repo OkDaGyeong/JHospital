@@ -2,9 +2,11 @@ import { combineReducers } from "redux";
 
 import auth from "./auth";
 import search from "./search";
+import patients from "./patients";
 const rootReducer = combineReducers({
   auth,
   search,
+  patients,
 });
 export default rootReducer;
 

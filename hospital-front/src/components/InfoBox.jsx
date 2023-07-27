@@ -46,7 +46,7 @@ function InfoBox({
             <Col>{department}</Col>
             <Col>{doctor}</Col>
             <Col className="longtext-box">{insurance}</Col>
-            <Col xs={4} className="longtext-box">
+            <Col xs={6} className="longtext-box">
               {diagnostic}
             </Col>
           </Row>

@@ -57,20 +57,6 @@ function OrderTable({
                 <td></td>
                 <td></td>
                 <td></td>
-                {/* <td key={order}>{order}</td>
-                <td key={division}>{division}</td>
-                <td key={recipe}>{recipe}</td>
-                <td key={recipeCode}>{recipeCode}</td>
-                <td key={volume}>{volume}</td>
-                <td key={quantity}>{quantity}</td>
-                <td key={number}>{number}</td>
-                <td key={days}>{days}</td>
-                <td key={prn}>{prn}</td>
-                <td key={routes}>{routes}</td>
-                <td key={usageSamplePart}>{usageSamplePart}</td>
-                <td key={medicine}>{medicine}</td>
-                <td key={mix}>{mix}</td>
-                <td key={comment}>{comment}</td> */}
               </tr>
             ))}
           </tbody>

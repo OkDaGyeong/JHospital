@@ -7,7 +7,7 @@ import LogoImg from "../images/logoBlack.png";
 
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../modules/auth";
-
+import { setPatientList } from "../modules/patients";
 // import { login } from "../modules/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -15,15 +15,11 @@ import axios from "axios";
 
 function LoginContainer() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); //v6부터 useHistory가 아닌 navigate를 사용해야함
+  const navigate = useNavigate();
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false); // 로그인 에러 상태 추가
-
-  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  // const username = useSelector((state) => state.auth.username);
-  // const employeeno = useSelector((state) => state.auth.employeeno);
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -43,21 +39,23 @@ function LoginContainer() {
     // 로그인 요청을 서버에 보냅니다.
     axios
       .post("/viewUser/login", {
-        id: id,
+        employeeNo: id,
         password: password,
       })
       .then((response) => {
         setLoginError(false);
         console.log(response);
         let obj = response.data;
-        console.log(obj.id);
-        console.log(obj.password);
+
+        console.log(response.data);
         if (response.data !== "error") {
           const user = {
-            username: response.data.id,
-            employeeno: response.data.employeeno,
+            username: response.data.viewUser.nameK,
+            employeeno: response.data.viewUser.employeeNo,
           };
+          const pList = response.data.patientList;
           dispatch(loginSuccess(user));
+          dispatch(setPatientList(pList));
           navigate("/patient-list/" + response.data.employeeno);
         } else {
           setLoginError(true);

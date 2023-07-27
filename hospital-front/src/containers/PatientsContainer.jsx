@@ -17,6 +17,8 @@ function PatientsContainer() {
 
   const doctorName = useSelector((state) => state.auth.username);
   const username = useSelector((state) => state.auth.employeeno);
+
+  const pList = useSelector((state) => state.patients.patientList);
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 560);
@@ -71,20 +73,20 @@ function PatientsContainer() {
         )}
       </Stack>
 
-      {Array.from({ length: 12 }).map((_, index) => (
+      {pList.map((patient, index) => (
         <InfoBox
           key={index}
-          ward="31"
-          room={"31" + index}
-          pName="김윤임"
-          age="75"
-          gender="F"
-          date="2023.07.11"
-          pNum="08033373"
-          department="IM"
-          doctor={doctorName}
-          insurance="건보"
-          diagnostic="부위가 명시되지 않은 요로감염"
+          ward={patient.ward}
+          room={patient.room}
+          pName={patient.patientName}
+          age={patient.age}
+          gender={patient.sex}
+          date={patient.date}
+          pNum={patient.patientNo}
+          department={patient.department}
+          doctor={patient.doctorName}
+          insurance={patient.insurance}
+          diagnostic={patient.diagnosis}
           onSelect={(e) => {
             navigate("/patient/" + index);
           }}

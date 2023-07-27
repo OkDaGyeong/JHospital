@@ -15,7 +15,7 @@ function App() {
   const employeeno = useSelector((state) => state.auth.employeeno);
 
   return (
-    <div className="App whitebg">
+    <div className="App">
       <Routes>
         {/* 로그인한 경우에만 접근 가능한 보호된 라우트 */}
         {isLoggedIn ? (
