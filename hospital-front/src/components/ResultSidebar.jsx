@@ -25,7 +25,7 @@ function ResultSidebar() {
                   border: "none",
                   marginBottom: "3px",
                   padding: "8px 5px",
-                  fontSize: "17px",
+                  fontSize: "16px",
                   // color: "#20bccc",
                 }}
                 action

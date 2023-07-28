@@ -5,10 +5,12 @@ $grey: #f1f2f7;
     th {
       text-align: center;
       background-color: $grey;
+      padding: 4px;
     }
 
     td {
       text-align: center;
+      padding: 4px;
     }
   }
 }
@@ -66,8 +68,5 @@ $grey: #f1f2f7;
 
 .menu-title {
   font-weight: 600;
-  margin: 10px 0;
-  display: block;
 
-  // border-top: 1px solid #ccc;
 }

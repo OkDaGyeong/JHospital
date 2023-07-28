@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import DatePickerCustom from "../components/DatePicker";
 import OrderTable from "../containers/OrderTable";
 import InfoTable from "../components/InfoTable";
-import SidebarMenu from "../components/SidebarMenu";
+import OrderSidebar from "../components/OrderSidbar";
 import ResultSidebar from "../components/ResultSidebar";
 // import Tab1 from "../containers/Tab1";
 function Patient() {
@@ -37,7 +37,7 @@ function Patient() {
             <Tab eventKey="prescription" title="처방내역">
               {/* 처방 내역 */}
 
-              <SidebarMenu />
+              <OrderSidebar />
               {/* <OrderTable /> */}
             </Tab>
             <Tab eventKey="inspection" title="검사결과">

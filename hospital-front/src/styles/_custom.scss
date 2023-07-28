@@ -41,5 +41,14 @@ $container-max-widths: (
 );
 
 
+.list-group-item {
+  padding: 5px !important;
+}
+
+.hr-style {
+  margin: 10px 0;
+
+}
+
 // Bootstrap 임포트
 @import "~bootstrap/scss/bootstrap";

@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setSearchData, setWard } from "../modules/search";
 import axios from "axios";
+
 function SearchBox({ handleSearch }) {
+  const suggestions = ["00D020", "00D024", "00A914", "00A924", "00D122"]; // 의사목록 받아오기
+  const sPatients = useSelector((state) => state.patients.patientList); //환자명 자동완성
+
   // const employeeno = useSelector((state) => state.auth.employeeno);
   const { employeeno, patient, ward } = useSelector((state) => state.search);
   const dispatch = useDispatch();
@@ -14,6 +18,13 @@ function SearchBox({ handleSearch }) {
     const selectedWard = event.target.value;
     dispatch(setWard(selectedWard));
   };
+
+  // const [searchEmployeeno, setSearchEmployeeno] = useState("");
+  // const handleChange = (e) => {
+  //   const { value } = e.target;
+  //   setSearchEmployeeno(value);
+  // };
+
   return (
     <>
       <Form id="search-box" className="card">
@@ -28,17 +39,29 @@ function SearchBox({ handleSearch }) {
             type="text"
             placeholder="의료진 코드"
             value={employeeno}
+            // onChange={handleChange}
+            list="suggestions" // input을 datalist와 연결
             onChange={(e) =>
               dispatch(
-                setSearchData({ patient: patient, employeeno: e.target.value })
+                setSearchData({
+                  patient: patient,
+                  employeeno: e.target.value,
+                })
               )
             }
           />
+          <datalist id="suggestions">
+            {/* datalist 요소를 사용하여 제안을 표시합니다. */}
+            {suggestions.map((suggestion) => (
+              <option key={suggestion} value={suggestion} />
+            ))}
+          </datalist>
 
           <Form.Control
             type="text"
             placeholder="환자명"
             value={patient}
+            list="suggestions-patient"
             onChange={(e) =>
               dispatch(
                 setSearchData({
@@ -48,6 +71,11 @@ function SearchBox({ handleSearch }) {
               )
             }
           />
+          <datalist id="suggestions-patient">
+            {sPatients.map((suggestion, index) => (
+              <option key={index} value={suggestion.patientName} />
+            ))}
+          </datalist>
 
           <Form.Select onChange={handleWardChange}>
             <option value="">병동선택</option>

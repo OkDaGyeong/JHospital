@@ -8,6 +8,7 @@ import LogoImg from "../images/logoBlack.png";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../modules/auth";
 import { setPatientList } from "../modules/patients";
+import { setSearchData } from "../modules/search";
 // import { login } from "../modules/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -56,6 +57,12 @@ function LoginContainer() {
           const pList = response.data.patientList;
           dispatch(loginSuccess(user));
           dispatch(setPatientList(pList));
+          dispatch(
+            setSearchData({
+              employeeno: user.employeeno,
+              patient: "",
+            })
+          );
           navigate("/patient-list/" + response.data.employeeno);
         } else {
           setLoginError(true);

@@ -18,7 +18,7 @@ function InfoTable({
 }) {
   return (
     <>
-      <h3 style={{ marginTop: "20px" }}>환자 기본 정보</h3>
+      <h4 style={{ marginTop: "20px" }}>환자 기본 정보</h4>
       <Table bordered responsive className="patient-table">
         <tbody>
           <tr>

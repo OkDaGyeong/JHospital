@@ -16,7 +16,7 @@ import { BiInjection } from "react-icons/bi";
 import { CgPill } from "react-icons/cg";
 import { BsClipboardCheck, BsFileEarmarkPpt } from "react-icons/bs";
 
-function SidebarMenu() {
+function OrderSidebar() {
   return (
     <>
       <Tab.Container
@@ -25,46 +25,44 @@ function SidebarMenu() {
         style={{ width: "100%" }}
       >
         <Row style={{ flexWrap: "nowrap" }}>
-          <Col style={{ minWidth: "100px", maxWidth: "100px" }}>
+          <Col style={{ minWidth: "120px", maxWidth: "120px" }}>
             <ListGroup style={{ borderRadius: "0" }}>
               <ListGroup.Item
-                style={{
-                  fontWeight: "600",
-                  border: "none",
-                  marginBottom: "3px",
-                  padding: "8px 5px",
-                  fontSize: "17px",
-                  // color: "#20bccc",
-                }}
+                variant="primary"
                 action
                 href="#all"
+                className="menu-title"
               >
                 <MdDensitySmall /> 전체
               </ListGroup.Item>
-
-              {/* <ListGroup.Item variant="primary">약</ListGroup.Item> */}
-              <span className="menu-title">
-                <CgPill /> 약
-              </span>
+              <hr className="hr-style" />
+              <ListGroup.Item
+                variant="primary"
+                action
+                href="#medicine"
+                className="menu-title"
+              >
+                <CgPill /> 약 / 주사
+              </ListGroup.Item>
               <ListGroup.Item action href="#medicine1">
                 내복
               </ListGroup.Item>
               <ListGroup.Item action href="#medicine2">
                 외복
               </ListGroup.Item>
-
-              {/* <ListGroup.Item variant="primary">주사</ListGroup.Item> */}
-              <span className="menu-title">
-                <BiInjection /> 주사
-              </span>
               <ListGroup.Item action href="#injection">
                 주사
               </ListGroup.Item>
+              <hr className="hr-style" />
 
-              {/* <ListGroup.Item variant="primary">검사</ListGroup.Item> */}
-              <span className="menu-title">
+              <ListGroup.Item
+                variant="primary"
+                action
+                href="#exam"
+                className="menu-title"
+              >
                 <MdInsertChartOutlined /> 검사
-              </span>
+              </ListGroup.Item>
               <ListGroup.Item action href="#exam1">
                 검사
               </ListGroup.Item>
@@ -74,12 +72,16 @@ function SidebarMenu() {
               <ListGroup.Item action href="#exam3">
                 수혈
               </ListGroup.Item>
+              <hr className="hr-style" />
 
-              {/* <ListGroup.Item variant="primary">영상</ListGroup.Item> */}
-              <span className="menu-title">
+              <ListGroup.Item
+                variant="primary"
+                action
+                href="#imaging"
+                className="menu-title"
+              >
                 <MdOndemandVideo /> 영상
-              </span>
-
+              </ListGroup.Item>
               <ListGroup.Item action href="#imaging1">
                 방사
               </ListGroup.Item>
@@ -93,23 +95,28 @@ function SidebarMenu() {
                 MR
               </ListGroup.Item>
 
-              {/* <ListGroup.Item variant="primary">물리</ListGroup.Item> */}
-              <span className="menu-title">
+              <hr className="hr-style" />
+              <ListGroup.Item
+                variant="primary"
+                action
+                href="#physical"
+                className="menu-title"
+              >
                 <BsFileEarmarkPpt /> 물리
-              </span>
-              <ListGroup.Item action href="#physical">
-                물리
               </ListGroup.Item>
 
-              {/* <ListGroup.Item variant="primary">기타</ListGroup.Item> */}
-              <span className="menu-title">
+              <hr className="hr-style" />
+              <ListGroup.Item
+                action
+                href="#other"
+                variant="primary"
+                className="menu-title"
+              >
                 <BsClipboardCheck /> 기타
-              </span>
-              <ListGroup.Item action href="#other">
-                기타
               </ListGroup.Item>
             </ListGroup>
           </Col>
+
           <Col style={{ overflow: "hidden" }}>
             <Tab.Content>
               <Tab.Pane eventKey="#all">
@@ -159,4 +166,4 @@ function SidebarMenu() {
   );
 }
 
-export default SidebarMenu;
+export default OrderSidebar;
