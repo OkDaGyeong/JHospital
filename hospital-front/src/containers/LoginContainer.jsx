@@ -54,8 +54,8 @@ function LoginContainer() {
             username: response.data.viewUser.nameK,
             employeeno: response.data.viewUser.employeeNo,
           };
-          const pList = response.data.patientList;
           dispatch(loginSuccess(user));
+          const pList = response.data.patientList;
           dispatch(setPatientList(pList));
           dispatch(
             setSearchData({

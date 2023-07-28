@@ -7,13 +7,14 @@ import { Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { setPatientList } from "../modules/patients";
 import axios from "axios";
 function PatientsContainer() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [patients, setPatients] = useState([]);
+  // const [patients, setPatients] = useState([]);
 
   const doctorName = useSelector((state) => state.auth.username);
   const username = useSelector((state) => state.auth.employeeno);
@@ -43,7 +44,9 @@ function PatientsContainer() {
         },
       })
       .then((response) => {
-        setPatients(response.data);
+        pList = response.data.patientList;
+        dispatch(setPatientList(pList));
+        // setPatients(response.data);
       })
       .catch((error) => {
         console.error("환자목록 오류", error);
@@ -51,6 +54,21 @@ function PatientsContainer() {
     console.log("employeeNo:", employeeno);
     console.log("patientName:", patient);
     console.log("ward:", ward);
+  };
+
+  const viewPatient = (patientNo, insurance) => {
+    //환자 상세페이지로 이동할 api작성하면 될듯
+    // axios
+    //   .get("", {
+    //     params: {},
+    //   })
+    //   .then((response) => {
+    //     //setPatients(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("환자 정보 불러오기 실패", error);
+    //   });
+    console.log(patientNo);
   };
 
   return (
@@ -89,6 +107,7 @@ function PatientsContainer() {
           diagnostic={patient.diagnosis}
           onSelect={(e) => {
             navigate("/patient/" + index);
+            viewPatient(patient.patientNo, patient.insurance);
           }}
         />
       ))}
