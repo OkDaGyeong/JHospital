@@ -19,7 +19,7 @@ function PatientsContainer() {
   const doctorName = useSelector((state) => state.auth.username);
   const username = useSelector((state) => state.auth.employeeno);
 
-  const pList = useSelector((state) => state.patients.patientList);
+  let pList = useSelector((state) => state.patients.patientList) || [];
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 560);
@@ -34,6 +34,10 @@ function PatientsContainer() {
   }, []);
 
   const { employeeno, patient, ward } = useSelector((state) => state.search);
+  // const [employeeno, setEmployeeno] = useState("");
+  // const [patient, setPatient] = useState("");
+  // const [ward, setWard] = useState("");
+
   const handleSearch = () => {
     axios
       .get("/patient/list", {
@@ -44,7 +48,8 @@ function PatientsContainer() {
         },
       })
       .then((response) => {
-        pList = response.data.patientList;
+        pList = response.data || [];
+        console.log(response.data);
         dispatch(setPatientList(pList));
         // setPatients(response.data);
       })
@@ -84,6 +89,7 @@ function PatientsContainer() {
         }}
       >
         <SearchBox handleSearch={handleSearch} />
+
         {isSmallScreen ? (
           ""
         ) : (

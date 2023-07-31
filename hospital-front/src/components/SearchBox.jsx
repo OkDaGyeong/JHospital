@@ -7,8 +7,8 @@ import { setSearchData, setWard } from "../modules/search";
 import axios from "axios";
 
 function SearchBox({ handleSearch }) {
-  const suggestions = ["00D020", "00D024", "00A914", "00A924", "00D122"]; // 의사목록 받아오기
-  const sPatients = useSelector((state) => state.patients.patientList); //환자명 자동완성
+  const suggestions = ["00D020", "00D005", "00A914", "00A924", "00D122"] || []; // 의사목록 받아오기
+  const sPatients = useSelector((state) => state.patients.patientList) || []; //환자명 자동완성
 
   // const employeeno = useSelector((state) => state.auth.employeeno);
   const { employeeno, patient, ward } = useSelector((state) => state.search);
