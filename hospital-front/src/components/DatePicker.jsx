@@ -10,6 +10,8 @@ import "../styles/datepicker.scss";
 const DatePickerCustom = () => {
   const [startDate, setStartDate] = useState(new Date());
   const systemDate = new Date(); // 시스템 날짜
+  const isNextDateDisabled = startDate.getTime() >= systemDate.getTime();
+
   const handleNextDate = () => {
     const nextDate = new Date(startDate);
     nextDate.setDate(startDate.getDate() + 1);
@@ -31,7 +33,11 @@ const DatePickerCustom = () => {
         gap: "10px",
       }}
     >
-      <button id="btn-preDate" onClick={handleNextDate}>
+      <button
+        id="btn-nextDate"
+        onClick={handleNextDate}
+        disabled={isNextDateDisabled}
+      >
         <AiFillCaretRight />
       </button>
       <div style={{ width: "120px" }}>
@@ -46,7 +52,7 @@ const DatePickerCustom = () => {
         />
       </div>
 
-      <button id="btn-nextDate" onClick={handlePreviousDate}>
+      <button id="btn-preDate" onClick={handlePreviousDate}>
         <AiFillCaretLeft />
       </button>
     </div>
