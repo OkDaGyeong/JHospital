@@ -82,3 +82,21 @@ select {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@media (max-width: 580px) {
+  .info-box-title {
+    span {
+      font-size: 14px;
+    }
+
+    button {
+      padding: 4px;
+      font-size: 13px;
+    }
+  }
+
+  .card-body,
+  .card-header {
+    padding: 10px !important;
+  }
+}

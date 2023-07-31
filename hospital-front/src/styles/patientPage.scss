@@ -36,7 +36,7 @@ $grey: #f1f2f7;
 }
 
 .table-container {
-  height: 800px;
+  height: 700px;
   overflow-y: auto;
 
 }
@@ -58,9 +58,16 @@ $grey: #f1f2f7;
 #order-list-table {
   text-align: center;
   width: 1200px;
+  font-size: 14px;
+
 
   thead tr th {
     background-color: $grey;
+    padding: 5px;
+  }
+
+  tbody tr td {
+    padding: 5px;
   }
 
 }

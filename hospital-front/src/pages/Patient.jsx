@@ -23,7 +23,7 @@ function Patient() {
 
         <hr />
 
-        <div style={{ height: "900px" }}>
+        <div style={{ height: "800px" }}>
           <DatePickerCustom />
           <Tabs
             defaultActiveKey="pState"
@@ -60,7 +60,7 @@ function Patient() {
         >
           <Button
             className="text-white"
-            onClick={(e) => navigate(-1)} //이전 페이지로 이동
+            onClick={(e) => navigate("/")} //이전 페이지로 이동
           >
             뒤로가기
           </Button>

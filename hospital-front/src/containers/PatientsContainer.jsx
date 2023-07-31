@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setPatientList } from "../modules/patients";
+
 import axios from "axios";
 function PatientsContainer() {
   const navigate = useNavigate();
@@ -38,28 +38,28 @@ function PatientsContainer() {
   // const [patient, setPatient] = useState("");
   // const [ward, setWard] = useState("");
 
-  const handleSearch = () => {
-    axios
-      .get("/patient/list", {
-        params: {
-          employeeNo: employeeno,
-          patientName: patient,
-          ward: ward,
-        },
-      })
-      .then((response) => {
-        pList = response.data || [];
-        console.log(response.data);
-        dispatch(setPatientList(pList));
-        // setPatients(response.data);
-      })
-      .catch((error) => {
-        console.error("환자목록 오류", error);
-      });
-    console.log("employeeNo:", employeeno);
-    console.log("patientName:", patient);
-    console.log("ward:", ward);
-  };
+  // const handleSearch = () => {
+  //   axios
+  //     .get("/patient/list", {
+  //       params: {
+  //         employeeNo: employeeno,
+  //         patientName: patient,
+  //         ward: ward,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       pList = response.data || [];
+  //       console.log(response.data);
+  //       dispatch(setPatientList(pList));
+  //       // setPatients(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("환자목록 오류", error);
+  //     });
+  //   console.log("employeeNo:", employeeno);
+  //   console.log("patientName:", patient);
+  //   console.log("ward:", ward);
+  // };
 
   const viewPatient = (patientNo, insurance) => {
     //환자 상세페이지로 이동할 api작성하면 될듯
@@ -88,7 +88,8 @@ function PatientsContainer() {
           padding: "25px 0",
         }}
       >
-        <SearchBox handleSearch={handleSearch} />
+        <SearchBox />
+        {/* <SearchBox handleSearch={handleSearch} /> */}
 
         {isSmallScreen ? (
           ""

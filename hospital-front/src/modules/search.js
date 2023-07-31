@@ -11,9 +11,10 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setSearchData(state, action) {
-      const { employeeno, patient } = action.payload;
+      const { employeeno, patient, ward } = action.payload;
       state.employeeno = employeeno;
       state.patient = patient;
+      state.ward = ward;
     },
     setWard(state, action) {
       state.ward = action.payload;

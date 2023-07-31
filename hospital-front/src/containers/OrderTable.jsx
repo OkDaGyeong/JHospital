@@ -1,5 +1,5 @@
-import React from "react";
-import { Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import "../styles/patientPage.scss";
 
 function OrderTable({
@@ -46,7 +46,12 @@ function OrderTable({
                 <td>RC</td>
                 <td>내복</td>
                 <td>CTHRB90</td>
-                <td>HERBEN SR TAB 90MG/1정 </td>
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={<Tooltip>{`${recipeCode}`}</Tooltip>}
+                >
+                  <td>HERBEN SR TAB 90MG/1정 </td>
+                </OverlayTrigger>
                 <td></td>
                 <td>1</td>
                 <td>1</td>
@@ -56,7 +61,12 @@ function OrderTable({
                 <td>P0010</td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={<Tooltip>{`${comment}`}</Tooltip>}
+                >
+                  <td></td>
+                </OverlayTrigger>
               </tr>
             ))}
           </tbody>

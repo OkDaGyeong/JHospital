@@ -5,25 +5,79 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setSearchData, setWard } from "../modules/search";
 import axios from "axios";
-
-function SearchBox({ handleSearch }) {
-  const suggestions = ["00D020", "00D005", "00A914", "00A924", "00D122"] || []; // 의사목록 받아오기
+import { setPatientList } from "../modules/patients";
+function SearchBox() {
+  // const suggestions = ["00D020", "00D005", "00A914", "00A924", "00D122"] || []; // 의사목록 받아오기
+  const suggestions = [
+    { code: "00D020", name: "박중재" },
+    { code: "00D005", name: "강민철" },
+    { code: "00D126", name: "홍정우" },
+    { code: "00D153", name: "윤홍권" },
+    { code: "00D140", name: "윤솔" },
+  ];
   const sPatients = useSelector((state) => state.patients.patientList) || []; //환자명 자동완성
 
   // const employeeno = useSelector((state) => state.auth.employeeno);
   const { employeeno, patient, ward } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
+  const [localSearchData, setLocalSearchData] = useState({
+    employeeno: employeeno,
+    patient: "",
+    ward: "",
+  });
+
   const handleWardChange = (event) => {
     const selectedWard = event.target.value;
-    dispatch(setWard(selectedWard));
+    setLocalSearchData({ ...localSearchData, ward: selectedWard });
+    //  dispatch(setWard(selectedWard));
   };
 
-  // const [searchEmployeeno, setSearchEmployeeno] = useState("");
-  // const handleChange = (e) => {
-  //   const { value } = e.target;
-  //   setSearchEmployeeno(value);
-  // };
+  const handleSearch = () => {
+    // if (
+    //   !localSearchData.employeeno ||
+    //   !suggestions.includes(localSearchData.employeeno)
+    // ) {
+    //   // 의료진 코드가 없거나 목록에 없는 경우
+    //   alert("의료진 코드를 올바르게 입력해주세요.");
+    //   return;
+    // }
+    if (
+      !localSearchData.employeeno ||
+      !suggestions.some(
+        (suggestion) =>
+          suggestion.code === localSearchData.employeeno ||
+          suggestion.name === localSearchData.employeeno
+      )
+    ) {
+      // 의료진 코드가 없거나 목록에 없는 경우
+      alert("의료진 코드를 올바르게 입력해주세요.");
+      return;
+    }
+    dispatch(setSearchData(localSearchData));
+    axios
+      .get("/patient/list", {
+        // params: localSearchData,
+        params: {
+          employeeNo: localSearchData.employeeno,
+          patientName: localSearchData.patient,
+          ward: localSearchData.ward,
+        },
+      })
+      .then((response) => {
+        console.log(localSearchData);
+        console.log(response.data);
+        // pList = response.data || [];
+        dispatch(setPatientList(response.data));
+        // setPatients(response.data);
+      })
+      .catch((error) => {
+        console.error("환자목록 오류", error);
+      });
+    console.log("employeeNo:", employeeno);
+    console.log("patientName:", patient);
+    console.log("ward:", ward);
+  };
 
   return (
     <>
@@ -36,39 +90,36 @@ function SearchBox({ handleSearch }) {
         </Stack>
         <Stack direction="horizontal" gap={3} id="search-input-box">
           <Form.Control
-            type="text"
+            type="search"
             placeholder="의료진 코드"
-            value={employeeno}
+            value={localSearchData.employeeno}
             // onChange={handleChange}
             list="suggestions" // input을 datalist와 연결
             onChange={(e) =>
-              dispatch(
-                setSearchData({
-                  patient: patient,
-                  employeeno: e.target.value,
-                })
-              )
+              setLocalSearchData({
+                ...localSearchData,
+                employeeno: e.target.value,
+              })
             }
           />
           <datalist id="suggestions">
-            {/* datalist 요소를 사용하여 제안을 표시합니다. */}
             {suggestions.map((suggestion) => (
-              <option key={suggestion} value={suggestion} />
+              <option key={suggestion.code} value={suggestion.code}>
+                {suggestion.name}
+              </option>
             ))}
           </datalist>
 
           <Form.Control
-            type="text"
+            type="search"
             placeholder="환자명"
-            value={patient}
+            value={localSearchData.patient}
             list="suggestions-patient"
             onChange={(e) =>
-              dispatch(
-                setSearchData({
-                  employeeno: employeeno,
-                  patient: e.target.value,
-                })
-              )
+              setLocalSearchData({
+                ...localSearchData,
+                patient: e.target.value,
+              })
             }
           />
           <datalist id="suggestions-patient">

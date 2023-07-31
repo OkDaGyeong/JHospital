@@ -20,22 +20,24 @@ function ResultSidebar() {
           <Col style={{ minWidth: "120px", maxWidth: "120px" }}>
             <ListGroup style={{ borderRadius: "0" }}>
               <ListGroup.Item
-                style={{
-                  fontWeight: "600",
-                  border: "none",
-                  marginBottom: "3px",
-                  padding: "8px 5px",
-                  fontSize: "16px",
-                  // color: "#20bccc",
-                }}
                 action
+                variant="primary"
                 href="#allResult"
+                className="menu-title"
               >
                 <MdDensitySmall /> 전체
               </ListGroup.Item>
+              <hr className="hr-style" />
 
-              {/* <ListGroup.Item variant="primary">약</ListGroup.Item> */}
-              <span className="menu-title">
+              {/* <ListGroup.Item variant="" className="menu-title">
+                <MdInsertChartOutlined /> 검사명
+              </ListGroup.Item> */}
+              <span
+                className="menu-title"
+                style={{
+                  marginBottom: "7px",
+                }}
+              >
                 <MdInsertChartOutlined /> 검사명
               </span>
               <ListGroup.Item action href="#medicine1">
