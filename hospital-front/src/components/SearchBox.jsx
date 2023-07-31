@@ -34,20 +34,11 @@ function SearchBox() {
   };
 
   const handleSearch = () => {
-    // if (
-    //   !localSearchData.employeeno ||
-    //   !suggestions.includes(localSearchData.employeeno)
-    // ) {
-    //   // 의료진 코드가 없거나 목록에 없는 경우
-    //   alert("의료진 코드를 올바르게 입력해주세요.");
-    //   return;
-    // }
     if (
       !localSearchData.employeeno ||
       !suggestions.some(
-        (suggestion) =>
-          suggestion.code === localSearchData.employeeno ||
-          suggestion.name === localSearchData.employeeno
+        (suggestion) => suggestion.code === localSearchData.employeeno
+        // suggestion.code === localSearchData.employeeno || suggestion.name === localSearchData.employeeno
       )
     ) {
       // 의료진 코드가 없거나 목록에 없는 경우
