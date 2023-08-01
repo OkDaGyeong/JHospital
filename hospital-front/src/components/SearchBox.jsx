@@ -3,7 +3,7 @@ import { Form, Button, Stack } from "react-bootstrap";
 import "../styles/patientListPage.scss";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setSearchData, setWard } from "../modules/search";
+import { setSearchData } from "../modules/search";
 import axios from "axios";
 import { setPatientList } from "../modules/patients";
 function SearchBox() {
@@ -45,6 +45,7 @@ function SearchBox() {
       alert("의료진 코드를 올바르게 입력해주세요.");
       return;
     }
+
     dispatch(setSearchData(localSearchData));
     axios
       .get("/patient/list", {

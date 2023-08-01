@@ -16,11 +16,8 @@ const searchSlice = createSlice({
       state.patient = patient;
       state.ward = ward;
     },
-    setWard(state, action) {
-      state.ward = action.payload;
-    },
   },
 });
 
-export const { setSearchData, setWard } = searchSlice.actions;
+export const { setSearchData } = searchSlice.actions;
 export default searchSlice.reducer;
