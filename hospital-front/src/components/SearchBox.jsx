@@ -23,8 +23,8 @@ function SearchBox() {
 
   const [localSearchData, setLocalSearchData] = useState({
     employeeno: employeeno,
-    patient: "",
-    ward: "",
+    patient: patient,
+    ward: ward,
   });
 
   const handleWardChange = (event) => {
@@ -119,8 +119,9 @@ function SearchBox() {
             ))}
           </datalist>
 
-          <Form.Select onChange={handleWardChange}>
+          <Form.Select onChange={handleWardChange} value={localSearchData.ward}>
             <option value="">병동선택</option>
+            <option value="21">21병동</option>
             <option value="31">31병동</option>
             <option value="51">51병동</option>
             <option value="61">61병동</option>
