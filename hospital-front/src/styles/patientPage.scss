@@ -1,7 +1,11 @@
 $grey: #f1f2f7;
 
 .patient-table {
+  table-layout: fixed;
+
   tbody tr {
+    vertical-align: middle;
+
     th {
       text-align: center;
       background-color: $grey;
@@ -29,6 +33,8 @@ $grey: #f1f2f7;
 
 @media (max-width: 580px) {
   .patient-table {
+    table-layout: inherit;
+
     th {
       display: none;
     }

@@ -25,12 +25,13 @@ function InfoTable({
           <tr>
             <th>차트번호</th>
             <td>{pNum}</td>
+            <th>환자명</th>
+            <td style={{ color: "#05438A" }}>{pName}</td>
             <th>병동/병실</th>
             <td>
               {ward} / {room}
             </td>
-            <th>환자명</th>
-            <td>{pName}</td>
+
             <th>나이/성별</th>
             <td>
               {age} / {gender}
@@ -51,9 +52,11 @@ function InfoTable({
             <td>{insurance}</td>
             <th>진단명</th>
             <td
-              colSpan={6}
+              colSpan={5}
               style={{
                 textAlign: "left",
+                paddingLeft: "10px",
+                color: "#05438A",
               }}
             >
               {diagnosis}
