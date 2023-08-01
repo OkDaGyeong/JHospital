@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // React Datepicker CSS
 import ko from "date-fns/locale/ko";
 
-import { Button } from "react-bootstrap";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 
 import "../styles/datepicker.scss";
 const DatePickerCustom = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const systemDate = new Date(); // 시스템 날짜
-  const isNextDateDisabled = startDate.getTime() >= systemDate.getTime();
+  const systemDate = new Date();
+  systemDate.setHours(0, 0, 0, 0); // 시스템 날짜
+
+  const isDateDisabled = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(0, 0, 0, 0);
+    return newDate >= systemDate;
+  };
 
   const handleNextDate = () => {
     const nextDate = new Date(startDate);
@@ -36,13 +41,12 @@ const DatePickerCustom = () => {
       <button
         id="btn-nextDate"
         onClick={handleNextDate}
-        disabled={isNextDateDisabled}
+        disabled={isDateDisabled(startDate)}
       >
         <AiFillCaretRight />
       </button>
       <div style={{ width: "120px" }}>
         <DatePicker
-          style={{ width: "150px" }}
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           dateFormat="yyyy/MM/dd"
