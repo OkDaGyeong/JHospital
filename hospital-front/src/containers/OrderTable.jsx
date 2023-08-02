@@ -1,23 +1,11 @@
 import React, { useState } from "react";
 import { Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import "../styles/patientPage.scss";
+import { useSelector } from "react-redux";
+function OrderTable({ dataList }) {
+  const AllData = useSelector((state) => state.order);
+  // const dataList = useSelector((state) => state.order.InternalMedList);
 
-function OrderTable({
-  order, //처방
-  division, //구분
-  recipe, //코드
-  recipeCode, //처방명
-  volume, //용량
-  quantity, //수
-  number, //횟
-  days, //일
-  prn, //P
-  routes, //투방
-  usageSamplePart, //용법/검체?
-  medicine, //급
-  mix, //MG?
-  comment, //비고?
-}) {
   return (
     <>
       <div className="table-container">
@@ -41,34 +29,35 @@ function OrderTable({
             </tr>
           </thead>
           <tbody>
-            {Array.from({ length: 50 }).map((_, index) => (
-              <tr key={index}>
-                <td>RC</td>
-                <td>내복</td>
-                <td>CTHRB90</td>
-                <OverlayTrigger
+            {dataList &&
+              dataList.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.order}</td>
+                  <td>{item.division}</td>
+                  <td>{item.recipeCode}</td>
+                  {/* <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip>{`${recipeCode}`}</Tooltip>}
-                >
-                  <td>HERBEN SR TAB 90MG/1정 </td>
-                </OverlayTrigger>
-                <td></td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td></td>
-                <td>PO</td>
-                <td>P0010</td>
-                <td></td>
-                <td></td>
-                <OverlayTrigger
+                > */}
+                  <td>{item.recipe}</td>
+                  {/* </OverlayTrigger> */}
+                  <td>{item.volume}</td>
+                  <td>{item.number}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.days}</td>
+                  <td>{item.prn}</td>
+                  <td>{item.routes}</td>
+                  <td>{item.usageSamplePart}</td>
+                  <td>{item.routes}</td>
+                  <td>{item.mix}</td>
+                  {/* <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip>{`${comment}`}</Tooltip>}
-                >
-                  <td></td>
-                </OverlayTrigger>
-              </tr>
-            ))}
+                > */}
+                  <td>{item.comment}</td>
+                  {/* </OverlayTrigger> */}
+                </tr>
+              ))}
           </tbody>
         </Table>
       </div>

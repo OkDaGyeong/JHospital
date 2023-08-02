@@ -9,6 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
+import {
+  setOrderDateList,
+  setSelectDate,
+  setInternalMedList,
+  setExternalMedList,
+  setInjectionList,
+} from "../modules/order";
+
 import axios from "axios";
 function PatientsContainer() {
   const navigate = useNavigate();
@@ -33,47 +41,57 @@ function PatientsContainer() {
     };
   }, []);
 
-  const { employeeno, patient, ward } = useSelector((state) => state.search);
-  // const [employeeno, setEmployeeno] = useState("");
-  // const [patient, setPatient] = useState("");
-  // const [ward, setWard] = useState("");
-
-  // const handleSearch = () => {
-  //   axios
-  //     .get("/patient/list", {
-  //       params: {
-  //         employeeNo: employeeno,
-  //         patientName: patient,
-  //         ward: ward,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       pList = response.data || [];
-  //       console.log(response.data);
-  //       dispatch(setPatientList(pList));
-  //       // setPatients(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("환자목록 오류", error);
-  //     });
-  //   console.log("employeeNo:", employeeno);
-  //   console.log("patientName:", patient);
-  //   console.log("ward:", ward);
-  // };
-
-  const viewPatient = (patientNo, insurance) => {
+  const viewPatient = (patientNo, date, department, code, subCode) => {
     //환자 상세페이지로 이동할 api작성하면 될듯
-    // axios
-    //   .get("", {
-    //     params: {},
-    //   })
-    //   .then((response) => {
-    //     //setPatients(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("환자 정보 불러오기 실패", error);
-    //   });
-    console.log(patientNo);
+    axios
+      .get("/viewPatient/detail-date", {
+        params: {
+          patientNo: patientNo,
+          date: date,
+          department: department,
+          code: code,
+          subCode: subCode,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        dispatch(setOrderDateList(response.data));
+        dispatch(setSelectDate(response.data[0]));
+        const sdate = response.data[0];
+        axios
+          .get("/viewPatient/detail-order", {
+            params: {
+              patientNo: patientNo,
+              date: date,
+              department: department,
+              code: code,
+              subCode: subCode,
+              orderDate: sdate,
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+            const internalData = response.data.filter(
+              (item) => item.division === "내복"
+            );
+            const externalData = response.data.filter(
+              (item) => item.division === "외용"
+            );
+            const injectionData = response.data.filter(
+              (item) => item.division === "주사"
+            );
+
+            dispatch(setInternalMedList(internalData));
+            dispatch(setExternalMedList(externalData));
+            dispatch(setInjectionList(injectionData));
+          })
+          .catch((error) => {
+            console.error("실패", error);
+          });
+      })
+      .catch((error) => {
+        console.error("오더일자 불러오기 실패", error);
+      });
   };
 
   return (
@@ -114,7 +132,13 @@ function PatientsContainer() {
           diagnostic={patient.diagnosis}
           onSelect={(e) => {
             navigate("/patient/" + index);
-            viewPatient(patient.patientNo, patient.insurance);
+            viewPatient(
+              patient.patientNo,
+              patient.date,
+              patient.department,
+              patient.code,
+              patient.subCode
+            );
           }}
         />
       ))}

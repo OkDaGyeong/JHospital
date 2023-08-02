@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  patientList: [],
+  patientList: null,
 };
 
 const patientSlice = createSlice({

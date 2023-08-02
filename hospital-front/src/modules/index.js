@@ -3,11 +3,13 @@ import { combineReducers } from "redux";
 import auth from "./auth";
 import search from "./search";
 import patients from "./patients";
+import order from "./order";
 
 const appReducer = combineReducers({
   auth,
   search,
   patients,
+  order,
 });
 
 const rootReducer = (state, action) => {

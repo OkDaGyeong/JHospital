@@ -56,7 +56,7 @@ function Patient() {
             <Tab eventKey="prescription" title="처방내역">
               {/* 처방 내역 */}
 
-              <OrderSidebar />
+              <OrderSidebar patientInfo={patientInfo} />
               {/* <OrderTable /> */}
             </Tab>
             <Tab eventKey="inspection" title="검사결과">

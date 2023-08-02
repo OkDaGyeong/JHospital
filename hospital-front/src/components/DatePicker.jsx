@@ -48,7 +48,10 @@ const DatePickerCustom = () => {
       <div style={{ width: "120px" }}>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => {
+            setStartDate(date);
+            console.log("변경:" + date);
+          }}
           dateFormat="yyyy/MM/dd"
           className="form-control datepick secondary"
           locale={ko}

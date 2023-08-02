@@ -15,8 +15,13 @@ import {
 import { BiInjection } from "react-icons/bi";
 import { CgPill } from "react-icons/cg";
 import { BsClipboardCheck, BsFileEarmarkPpt } from "react-icons/bs";
+import { useSelector } from "react-redux";
+function OrderSidebar({ patientInfo }) {
+  const selectDate = useSelector((state) => state.order.selectDate);
+  const dataList = useSelector((state) => state.order);
 
-function OrderSidebar() {
+  // const dataListAll =
+
   return (
     <>
       <Tab.Container
@@ -120,43 +125,60 @@ function OrderSidebar() {
           <Col style={{ overflow: "hidden" }}>
             <Tab.Content>
               <Tab.Pane eventKey="#all">
-                <OrderTable />
+                {/* 전체 */}
+                <OrderTable dataList={dataList.InternalMedList} />
+              </Tab.Pane>
+              {/* 약/주사 : 내복, 외복, 주사 */}
+              <Tab.Pane eventKey="#medicine">
+                <OrderTable dataList={dataList.InternalMedList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#medicine1">
-                <OrderTable />
+                <OrderTable dataList={dataList.InternalMedList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#medicine2">
-                <OrderTable />
+                <OrderTable dataList={dataList.ExternalMedList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#injection">
-                <OrderTable />
+                <OrderTable dataList={dataList.InjectionList} />
+              </Tab.Pane>
+
+              {/* 검사 : 검사, 병리, 수혈 */}
+              <Tab.Pane eventKey="#exam">
+                <OrderTable dataList={dataList.PathologyList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#exam1">
-                <OrderTable />
+                <OrderTable dataList={dataList.ExaminationList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#exam2">
-                <OrderTable />
+                <OrderTable dataList={dataList.PathologyList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#exam3">
-                <OrderTable />
+                <OrderTable dataList={dataList.BloodTransList} />
+              </Tab.Pane>
+
+              {/* 영상 : 방사, 초음, CT, MR */}
+              <Tab.Pane eventKey="#imaging">
+                <OrderTable dataList={dataList.RadiationList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging1">
-                <OrderTable />
+                <OrderTable dataList={dataList.RadiationList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging2">
-                <OrderTable />
+                <OrderTable dataList={dataList.UltrasoundList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging3">
-                <OrderTable />
+                <OrderTable dataList={dataList.CTList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging4">
-                <OrderTable />
+                <OrderTable dataList={dataList.MRList} />
               </Tab.Pane>
+
+              {/* 물리, 기타 */}
               <Tab.Pane eventKey="#physical">
-                <OrderTable />
+                <OrderTable dataList={dataList.PhysicalList} />
               </Tab.Pane>
               <Tab.Pane eventKey="#other">
-                <OrderTable />
+                <OrderTable dataList={dataList.OthersList} />
               </Tab.Pane>
             </Tab.Content>
           </Col>
