@@ -15,6 +15,15 @@ import {
   setInternalMedList,
   setExternalMedList,
   setInjectionList,
+  setExaminationList,
+  setPathologyList,
+  setBloodTransList,
+  setRadiationList,
+  setUltrasoundList,
+  setCTList,
+  setMRList,
+  setPhysicalList,
+  setOthersList,
 } from "../modules/order";
 
 import axios from "axios";
@@ -55,9 +64,23 @@ function PatientsContainer() {
       })
       .then((response) => {
         console.log(response.data);
-        dispatch(setOrderDateList(response.data));
+        dispatch(setOrderDateList(response.data)); // "/viewPatient/detail-date"의 response를 orderDate로 설정
         dispatch(setSelectDate(response.data[0]));
         const sdate = response.data[0];
+
+        const divisions = {
+          내복: "internalData",
+          외용: "externalData",
+          주사: "injectionData",
+          검사: "examinationData",
+          병리: "pathologyData",
+          수혈: "bloodtransData",
+          방사: "radiationData",
+          초음: "ultrasoundList",
+          CT: "CTData",
+          MR: "MRData",
+          물리: "physicalData",
+        };
         axios
           .get("/viewPatient/detail-order", {
             params: {
@@ -71,19 +94,34 @@ function PatientsContainer() {
           })
           .then((response) => {
             console.log(response.data);
-            const internalData = response.data.filter(
-              (item) => item.division === "내복"
-            );
-            const externalData = response.data.filter(
-              (item) => item.division === "외용"
-            );
-            const injectionData = response.data.filter(
-              (item) => item.division === "주사"
-            );
+            const categorizedData = {};
+            categorizedData["otherData"] = [];
+            for (const [division, listName] of Object.entries(divisions)) {
+              categorizedData[listName] = response.data.filter(
+                (item) => item.division === division
+              );
+            }
 
-            dispatch(setInternalMedList(internalData));
-            dispatch(setExternalMedList(externalData));
-            dispatch(setInjectionList(injectionData));
+            // "otherData" 배열에 속하지 않는 항목들을 추가합니다.
+            for (const item of response.data) {
+              if (!(item.division in divisions)) {
+                categorizedData["otherData"].push(item);
+              }
+            }
+
+            // 각각의 dispatch 함수를 사용하여 데이터를 처리합니다.
+            dispatch(setInternalMedList(categorizedData["internalData"]));
+            dispatch(setExternalMedList(categorizedData["externalData"]));
+            dispatch(setInjectionList(categorizedData["injectionData"]));
+            dispatch(setExaminationList(categorizedData["examinationData"]));
+            dispatch(setPathologyList(categorizedData["pathologyData"]));
+            dispatch(setBloodTransList(categorizedData["bloodtransData"]));
+            dispatch(setRadiationList(categorizedData["radiationData"]));
+            dispatch(setUltrasoundList(categorizedData["ultrasoundList"]));
+            dispatch(setCTList(categorizedData["CTData"]));
+            dispatch(setMRList(categorizedData["MRData"]));
+            dispatch(setPhysicalList(categorizedData["physicalData"]));
+            dispatch(setOthersList(categorizedData["otherData"]));
           })
           .catch((error) => {
             console.error("실패", error);

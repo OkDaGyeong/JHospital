@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  orderDateList: null, //오더날짜리스트
-  selectDate: null, //선택한 날짜
+  orderDateList: [], //오더날짜리스트
+  selectDate: "", //선택한 날짜
 
-  InternalMedList: null, // 내복
-  ExternalMedList: null, // 외복
-  InjectionList: null, // 주사
-  ExaminationList: null, // 검사
-  PathologyList: null, // 병리
-  BloodTransList: null, // 수혈
-  RadiationList: null, // 방사
-  UltrasoundList: null, // 초음
-  CTList: null, // CT
-  MRList: null, // MR
-  PhysicalList: null, //물리
-  OthersList: null, //기타
+  InternalMedList: [], // 내복
+  ExternalMedList: [], // 외복
+  InjectionList: [], // 주사
+  ExaminationList: [], // 검사
+  PathologyList: [], // 병리
+  BloodTransList: [], // 수혈
+  RadiationList: [], // 방사
+  UltrasoundList: [], // 초음
+  CTList: [], // CT
+  MRList: [], // MR
+  PhysicalList: [], //물리
+  OthersList: [], //기타
 };
 
 const orderSlice = createSlice({
@@ -64,6 +64,9 @@ const orderSlice = createSlice({
     setOthersList(state, action) {
       state.OthersList = action.payload;
     },
+    setOrderNull(state, action) {
+      return initialState;
+    },
   },
 });
 
@@ -82,5 +85,6 @@ export const {
   setMRList,
   setPhysicalList,
   setOthersList,
+  setOrderNull,
 } = orderSlice.actions;
 export default orderSlice.reducer;

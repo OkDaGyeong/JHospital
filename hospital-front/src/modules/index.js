@@ -4,12 +4,14 @@ import auth from "./auth";
 import search from "./search";
 import patients from "./patients";
 import order from "./order";
+import doctors from "./doctors";
 
 const appReducer = combineReducers({
   auth,
   search,
   patients,
   order,
+  doctors,
 });
 
 const rootReducer = (state, action) => {

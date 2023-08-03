@@ -12,14 +12,17 @@ import InfoTable from "../components/InfoTable";
 import OrderSidebar from "../components/OrderSidbar";
 import ResultSidebar from "../components/ResultSidebar";
 
+import { setOrderNull } from "../modules/order";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 // import Tab1 from "../containers/Tab1";
 function Patient() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const { patientId } = useParams();
   const patientInfo =
     useSelector((state) => state.patients.patientList[patientId]) || [];
+
   // console.log(patientInfo);
   return (
     <div className="App2">
@@ -79,7 +82,10 @@ function Patient() {
         >
           <Button
             className="text-white"
-            onClick={(e) => navigate("/")} //이전 페이지로 이동
+            onClick={(e) => {
+              navigate("/");
+              dispatch(setOrderNull());
+            }} //이전 페이지로 이동
           >
             뒤로가기
           </Button>

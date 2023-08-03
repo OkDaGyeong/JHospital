@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../modules/auth";
 import { setPatientList } from "../modules/patients";
 import { setSearchData } from "../modules/search";
+import { setDoctorList } from "../modules/doctors";
 // import { login } from "../modules/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -64,6 +65,14 @@ function LoginContainer() {
             })
           );
           navigate("/patient-list/" + response.data.employeeno);
+          axios
+            .post("/viewUser/search-dr")
+            .then((response) => {
+              dispatch(setDoctorList(response.data));
+            })
+            .catch((error) => {
+              console.log("의사목록 에러");
+            });
         } else {
           setLoginError(true);
         }

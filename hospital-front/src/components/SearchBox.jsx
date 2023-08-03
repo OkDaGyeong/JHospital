@@ -7,14 +7,7 @@ import { setSearchData } from "../modules/search";
 import axios from "axios";
 import { setPatientList } from "../modules/patients";
 function SearchBox() {
-  // const suggestions = ["00D020", "00D005", "00A914", "00A924", "00D122"] || []; // 의사목록 받아오기
-  const suggestions = [
-    { code: "00D020", name: "박중재" },
-    { code: "00D005", name: "강민철" },
-    { code: "00D126", name: "홍정우" },
-    { code: "00D153", name: "윤홍권" },
-    { code: "00D140", name: "윤솔" },
-  ];
+  const suggestions = useSelector((state) => state.doctors.doctorList);
   const sPatients = useSelector((state) => state.patients.patientList) || []; //환자명 자동완성
 
   // const employeeno = useSelector((state) => state.auth.employeeno);
@@ -37,7 +30,7 @@ function SearchBox() {
     if (
       !localSearchData.employeeno ||
       !suggestions.some(
-        (suggestion) => suggestion.code === localSearchData.employeeno
+        (suggestion) => suggestion.employeeNo === localSearchData.employeeno
         // suggestion.code === localSearchData.employeeno || suggestion.name === localSearchData.employeeno
       )
     ) {
@@ -96,8 +89,8 @@ function SearchBox() {
           />
           <datalist id="suggestions">
             {suggestions.map((suggestion) => (
-              <option key={suggestion.code} value={suggestion.code}>
-                {suggestion.name}
+              <option key={suggestion.employeeNo} value={suggestion.employeeNo}>
+                {suggestion.nameK}
               </option>
             ))}
           </datalist>

@@ -29,35 +29,38 @@ function OrderTable({ dataList }) {
             </tr>
           </thead>
           <tbody>
-            {dataList &&
+            {dataList && dataList.length > 0 ? (
               dataList.map((item, index) => (
                 <tr key={index}>
                   <td>{item.order}</td>
                   <td>{item.division}</td>
                   <td>{item.recipeCode}</td>
-                  {/* <OverlayTrigger
-                  placement="bottom"
-                  overlay={<Tooltip>{`${recipeCode}`}</Tooltip>}
-                > */}
+                  {/* <td style={{ textAlign: "left" }}>{item.recipe}</td> */}
                   <td>{item.recipe}</td>
-                  {/* </OverlayTrigger> */}
                   <td>{item.volume}</td>
-                  <td>{item.number}</td>
                   <td>{item.quantity}</td>
+                  <td>{item.number}</td>
                   <td>{item.days}</td>
                   <td>{item.prn}</td>
                   <td>{item.routes}</td>
                   <td>{item.usageSamplePart}</td>
-                  <td>{item.routes}</td>
+                  <td>{item.medicine}</td>
                   <td>{item.mix}</td>
-                  {/* <OverlayTrigger
-                  placement="bottom"
-                  overlay={<Tooltip>{`${comment}`}</Tooltip>}
-                > */}
                   <td>{item.comment}</td>
-                  {/* </OverlayTrigger> */}
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="14"
+                  style={{
+                    color: "#20bccc",
+                  }}
+                >
+                  표시할 데이터가 없습니다
+                </td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </div>

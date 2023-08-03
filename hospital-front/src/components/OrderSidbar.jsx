@@ -50,13 +50,22 @@ function OrderSidebar({ patientInfo }) {
                 <CgPill /> 약 / 주사
               </ListGroup.Item>
               <ListGroup.Item action href="#medicine1">
-                내복
+                내복{" "}
+                <span className="list-count">
+                  ({dataList.InternalMedList.length})
+                </span>
               </ListGroup.Item>
               <ListGroup.Item action href="#medicine2">
-                외복
+                외복{" "}
+                <span className="list-count">
+                  ({dataList.ExternalMedList.length})
+                </span>
               </ListGroup.Item>
               <ListGroup.Item action href="#injection">
-                주사
+                주사{" "}
+                <span className="list-count">
+                  ({dataList.InjectionList.length})
+                </span>
               </ListGroup.Item>
               <hr className="hr-style" />
 
@@ -69,13 +78,22 @@ function OrderSidebar({ patientInfo }) {
                 <MdInsertChartOutlined /> 검사
               </ListGroup.Item>
               <ListGroup.Item action href="#exam1">
-                검사
+                검사{" "}
+                <span className="list-count">
+                  ({dataList.ExaminationList.length})
+                </span>
               </ListGroup.Item>
               <ListGroup.Item action href="#exam2">
-                병리
+                병리{" "}
+                <span className="list-count">
+                  ({dataList.PathologyList.length})
+                </span>
               </ListGroup.Item>
               <ListGroup.Item action href="#exam3">
-                수혈
+                수혈{" "}
+                <span className="list-count">
+                  ({dataList.BloodTransList.length})
+                </span>
               </ListGroup.Item>
               <hr className="hr-style" />
 
@@ -88,16 +106,24 @@ function OrderSidebar({ patientInfo }) {
                 <MdOndemandVideo /> 영상
               </ListGroup.Item>
               <ListGroup.Item action href="#imaging1">
-                방사
+                방사{" "}
+                <span className="list-count">
+                  ({dataList.RadiationList.length})
+                </span>
               </ListGroup.Item>
               <ListGroup.Item action href="#imaging2">
-                초음
+                초음{" "}
+                <span className="list-count">
+                  ({dataList.UltrasoundList.length})
+                </span>
               </ListGroup.Item>
               <ListGroup.Item action href="#imaging3">
-                CT
+                CT{" "}
+                <span className="list-count">({dataList.CTList.length})</span>
               </ListGroup.Item>
               <ListGroup.Item action href="#imaging4">
-                MR
+                MR{" "}
+                <span className="list-count">({dataList.MRList.length})</span>
               </ListGroup.Item>
 
               <hr className="hr-style" />
@@ -107,7 +133,10 @@ function OrderSidebar({ patientInfo }) {
                 href="#physical"
                 className="menu-title"
               >
-                <BsFileEarmarkPpt /> 물리
+                <BsFileEarmarkPpt /> 물리{" "}
+                <span className="list-count">
+                  ({dataList.PhysicalList.length})
+                </span>
               </ListGroup.Item>
 
               <hr className="hr-style" />
@@ -117,7 +146,10 @@ function OrderSidebar({ patientInfo }) {
                 variant="primary"
                 className="menu-title"
               >
-                <BsClipboardCheck /> 기타
+                <BsClipboardCheck /> 기타{" "}
+                <span className="list-count">
+                  ({dataList.OthersList.length})
+                </span>
               </ListGroup.Item>
             </ListGroup>
           </Col>
@@ -126,11 +158,32 @@ function OrderSidebar({ patientInfo }) {
             <Tab.Content>
               <Tab.Pane eventKey="#all">
                 {/* 전체 */}
-                <OrderTable dataList={dataList.InternalMedList} />
+                <OrderTable
+                  dataList={[
+                    ...dataList.InternalMedList,
+                    ...dataList.ExternalMedList,
+                    ...dataList.InjectionList,
+                    ...dataList.ExaminationList,
+                    ...dataList.PathologyList,
+                    ...dataList.BloodTransList,
+                    ...dataList.RadiationList,
+                    ...dataList.UltrasoundList,
+                    ...dataList.CTList,
+                    ...dataList.MRList,
+                    ...dataList.PhysicalList,
+                    ...dataList.OthersList,
+                  ]}
+                />
               </Tab.Pane>
               {/* 약/주사 : 내복, 외복, 주사 */}
               <Tab.Pane eventKey="#medicine">
-                <OrderTable dataList={dataList.InternalMedList} />
+                <OrderTable
+                  dataList={[
+                    ...dataList.InternalMedList,
+                    ...dataList.ExternalMedList,
+                    ...dataList.InjectionList,
+                  ]}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="#medicine1">
                 <OrderTable dataList={dataList.InternalMedList} />
@@ -144,7 +197,13 @@ function OrderSidebar({ patientInfo }) {
 
               {/* 검사 : 검사, 병리, 수혈 */}
               <Tab.Pane eventKey="#exam">
-                <OrderTable dataList={dataList.PathologyList} />
+                <OrderTable
+                  dataList={[
+                    ...dataList.ExaminationList,
+                    ...dataList.PathologyList,
+                    ...dataList.BloodTransList,
+                  ]}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="#exam1">
                 <OrderTable dataList={dataList.ExaminationList} />
@@ -158,7 +217,14 @@ function OrderSidebar({ patientInfo }) {
 
               {/* 영상 : 방사, 초음, CT, MR */}
               <Tab.Pane eventKey="#imaging">
-                <OrderTable dataList={dataList.RadiationList} />
+                <OrderTable
+                  dataList={[
+                    ...dataList.RadiationList,
+                    ...dataList.UltrasoundList,
+                    ...dataList.CTList,
+                    ...dataList.MRList,
+                  ]}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="#imaging1">
                 <OrderTable dataList={dataList.RadiationList} />
