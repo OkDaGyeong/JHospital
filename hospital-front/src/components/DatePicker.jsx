@@ -4,11 +4,12 @@ import "react-datepicker/dist/react-datepicker.css"; // React Datepicker CSS
 import ko from "date-fns/locale/ko";
 
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux";
 import "../styles/datepicker.scss";
 const DatePickerCustom = () => {
   const orderDateList = useSelector((state) => state.order.orderDateList);
   const selectDate = useSelector((state) => state.order.selectDate);
+
   const [startDate, setStartDate] = useState(new Date());
   const systemDate = new Date();
   systemDate.setHours(0, 0, 0, 0); // 시스템 날짜
