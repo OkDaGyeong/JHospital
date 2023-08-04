@@ -3,9 +3,6 @@ import { Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import "../styles/patientPage.scss";
 import { useSelector } from "react-redux";
 function OrderTable({ dataList }) {
-  const AllData = useSelector((state) => state.order);
-  // const dataList = useSelector((state) => state.order.InternalMedList);
-
   return (
     <>
       <div className="table-container">
@@ -35,8 +32,8 @@ function OrderTable({ dataList }) {
                   <td>{item.order}</td>
                   <td>{item.division}</td>
                   <td>{item.recipeCode}</td>
-                  {/* <td style={{ textAlign: "left" }}>{item.recipe}</td> */}
-                  <td>{item.recipe}</td>
+                  <td style={{ textAlign: "left" }}>{item.recipe}</td>
+                  {/* <td>{item.recipe}</td> */}
                   <td>{item.volume}</td>
                   <td>{item.quantity}</td>
                   <td>{item.number}</td>

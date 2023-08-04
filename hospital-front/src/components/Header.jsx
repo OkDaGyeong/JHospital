@@ -22,7 +22,7 @@ function Header() {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // 컴포넌트 마운트 시에도 한 번 실행하여 초기 값을 설정합니다.
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -31,18 +31,18 @@ function Header() {
 
   const navigate = useNavigate();
 
-  const [showModal, setShowModal] = useState(false); // 모달의 표시 여부를 관리합니다.
+  const [showModal, setShowModal] = useState(false); // 모달의 표시 여부
 
   const handleLogout = () => {
     dispatch(logoutSuccess());
     navigate("/");
   };
-  // 로그아웃 버튼을 누를 때 모달을 표시하는 함수
+  // 로그아웃 버튼을 누를 때 모달 표시
   const handleLogoutClick = (event) => {
     setShowModal(true);
   };
 
-  // 모달에서 취소 또는 로그아웃 버튼을 누를 때 모달을 닫는 함수
+  // 모달에서 취소 또는 로그아웃 버튼을 누를 때 모달 닫음
   const handleCloseModal = () => {
     setShowModal(false);
   };

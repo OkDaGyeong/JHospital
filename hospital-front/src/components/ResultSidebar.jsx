@@ -29,9 +29,6 @@ function ResultSidebar() {
               </ListGroup.Item>
               <hr className="hr-style" />
 
-              {/* <ListGroup.Item variant="" className="menu-title">
-                <MdInsertChartOutlined /> 검사명
-              </ListGroup.Item> */}
               <span
                 className="menu-title"
                 style={{

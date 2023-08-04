@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import UserBox from "../components/UserBox";
 import InfoBox from "../components/InfoBox";
 import SearchBox from "../components/SearchBox";
-import { Stack } from "react-bootstrap";
+import { Stack, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
@@ -31,7 +31,6 @@ function PatientsContainer() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  // const [patients, setPatients] = useState([]);
 
   const doctorName = useSelector((state) => state.auth.username);
   const username = useSelector((state) => state.auth.employeeno);
@@ -43,7 +42,7 @@ function PatientsContainer() {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // 컴포넌트 마운트 시에도 한 번 실행하여 초기 값을 설정합니다.
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -51,7 +50,6 @@ function PatientsContainer() {
   }, []);
 
   const viewPatient = (patientNo, date, department, code, subCode) => {
-    //환자 상세페이지로 이동할 api작성하면 될듯
     axios
       .get("/viewPatient/detail-date", {
         params: {
@@ -63,8 +61,8 @@ function PatientsContainer() {
         },
       })
       .then((response) => {
-        console.log(response.data);
-        dispatch(setOrderDateList(response.data)); // "/viewPatient/detail-date"의 response를 orderDate로 설정
+        // console.log(response.data);
+        dispatch(setOrderDateList(response.data));
         dispatch(setSelectDate(response.data[0]));
         const sdate = response.data[0];
 
@@ -102,14 +100,13 @@ function PatientsContainer() {
               );
             }
 
-            // "otherData" 배열에 속하지 않는 항목들을 추가합니다.
+            // "otherData" 배열에 속하지 않는 항목 추가
             for (const item of response.data) {
               if (!(item.division in divisions)) {
                 categorizedData["otherData"].push(item);
               }
             }
 
-            // 각각의 dispatch 함수를 사용하여 데이터를 처리합니다.
             dispatch(setInternalMedList(categorizedData["internalData"]));
             dispatch(setExternalMedList(categorizedData["externalData"]));
             dispatch(setInjectionList(categorizedData["injectionData"]));
@@ -154,32 +151,47 @@ function PatientsContainer() {
         )}
       </Stack>
 
-      {pList.map((patient, index) => (
-        <InfoBox
-          key={index}
-          ward={patient.ward}
-          room={patient.room}
-          pName={patient.patientName}
-          age={patient.age}
-          gender={patient.sex}
-          date={patient.date}
-          pNum={patient.patientNo}
-          department={patient.department}
-          doctor={patient.doctorName}
-          insurance={patient.insurance}
-          diagnostic={patient.diagnosis}
-          onSelect={(e) => {
-            navigate("/patient/" + index);
-            viewPatient(
-              patient.patientNo,
-              patient.date,
-              patient.department,
-              patient.code,
-              patient.subCode
-            );
+      {pList.length > 0 ? (
+        pList.map((patient, index) => (
+          <InfoBox
+            key={index}
+            ward={patient.ward}
+            room={patient.room}
+            pName={patient.patientName}
+            age={patient.age}
+            gender={patient.sex}
+            date={patient.date}
+            pNum={patient.patientNo}
+            department={patient.department}
+            doctor={patient.doctorName}
+            insurance={patient.insurance}
+            diagnostic={patient.diagnosis}
+            onSelect={(e) => {
+              navigate("/patient/" + index);
+              viewPatient(
+                patient.patientNo,
+                patient.date,
+                patient.department,
+                patient.code,
+                patient.subCode
+              );
+            }}
+          />
+        ))
+      ) : (
+        <Card
+          className="card-list"
+          style={{
+            height: "100px",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
-      ))}
+        >
+          <Card.Text style={{ color: "#0765A8" }}>
+            검색 조건과 일치하는 데이터가 없습니다.
+          </Card.Text>
+        </Card>
+      )}
     </>
   );
 }

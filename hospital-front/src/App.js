@@ -10,7 +10,6 @@ import NotFoundPage from "./pages/Error404";
 import "./App.scss";
 
 function App() {
-  // useSelector를 이용하여 store의 isLoggedIn 상태를 가져옵니다.
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const employeeno = useSelector((state) => state.auth.employeeno);
 

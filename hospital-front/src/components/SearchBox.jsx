@@ -10,7 +10,6 @@ function SearchBox() {
   const suggestions = useSelector((state) => state.doctors.doctorList);
   const sPatients = useSelector((state) => state.patients.patientList) || []; //환자명 자동완성
 
-  // const employeeno = useSelector((state) => state.auth.employeeno);
   const { employeeno, patient, ward } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
@@ -23,7 +22,6 @@ function SearchBox() {
   const handleWardChange = (event) => {
     const selectedWard = event.target.value;
     setLocalSearchData({ ...localSearchData, ward: selectedWard });
-    //  dispatch(setWard(selectedWard));
   };
 
   const handleSearch = () => {
@@ -31,7 +29,6 @@ function SearchBox() {
       !localSearchData.employeeno ||
       !suggestions.some(
         (suggestion) => suggestion.employeeNo === localSearchData.employeeno
-        // suggestion.code === localSearchData.employeeno || suggestion.name === localSearchData.employeeno
       )
     ) {
       // 의료진 코드가 없거나 목록에 없는 경우
@@ -50,8 +47,8 @@ function SearchBox() {
         },
       })
       .then((response) => {
-        console.log(localSearchData);
-        console.log(response.data);
+        // console.log(localSearchData);
+        // console.log(response.data);
         // pList = response.data || [];
         dispatch(setPatientList(response.data));
         // setPatients(response.data);
@@ -78,7 +75,6 @@ function SearchBox() {
             type="search"
             placeholder="의료진 코드"
             value={localSearchData.employeeno}
-            // onChange={handleChange}
             list="suggestions" // input을 datalist와 연결
             onChange={(e) =>
               setLocalSearchData({

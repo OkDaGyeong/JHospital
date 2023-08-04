@@ -10,7 +10,7 @@ import { loginSuccess } from "../modules/auth";
 import { setPatientList } from "../modules/patients";
 import { setSearchData } from "../modules/search";
 import { setDoctorList } from "../modules/doctors";
-// import { login } from "../modules/auth";
+
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
@@ -21,7 +21,7 @@ function LoginContainer() {
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState(false); // 로그인 에러 상태 추가
+  const [loginError, setLoginError] = useState(false); // 로그인 에러 상태
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -38,7 +38,6 @@ function LoginContainer() {
   };
 
   const handleLogin = () => {
-    // 로그인 요청을 서버에 보냅니다.
     axios
       .post("/viewUser/login", {
         employeeNo: id,
