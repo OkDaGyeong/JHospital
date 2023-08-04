@@ -10,6 +10,9 @@ import { FiLogOut } from "react-icons/fi";
 
 import { useDispatch } from "react-redux";
 import { logoutSuccess } from "../modules/auth";
+import { setOrderNull } from "../modules/order";
+
+import LogoutConfirmationModal from "./LogoutConfirmationModal";
 function Header() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const dispatch = useDispatch();
@@ -27,12 +30,31 @@ function Header() {
   }, []);
 
   const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false); // 모달의 표시 여부를 관리합니다.
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess());
+    navigate("/");
+  };
+  // 로그아웃 버튼을 누를 때 모달을 표시하는 함수
+  const handleLogoutClick = (event) => {
+    setShowModal(true);
+  };
+
+  // 모달에서 취소 또는 로그아웃 버튼을 누를 때 모달을 닫는 함수
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <Navbar className="bg-navy">
       <Container className="bg-navy">
         <Navbar.Brand
           href="/"
           style={{ display: "flex", alignItems: "center" }}
+          onClick={(e) => {
+            dispatch(setOrderNull());
+          }}
         >
           <img
             alt="로고이미지"
@@ -47,19 +69,23 @@ function Header() {
         </Navbar.Brand>
 
         {isSmallScreen ? (
-          <Button
-            style={{
-              backgroundColor: "transparent",
-              border: "none",
-            }}
-            className="text-white"
-            onClick={(e) => {
-              dispatch(logoutSuccess());
-              navigate("/");
-            }}
-          >
-            <FiLogOut />
-          </Button>
+          <>
+            <Button
+              style={{
+                backgroundColor: "transparent",
+                border: "none",
+              }}
+              className="text-white"
+              onClick={handleLogoutClick}
+            >
+              <FiLogOut />
+            </Button>
+            <LogoutConfirmationModal
+              show={showModal}
+              onClose={handleCloseModal}
+              onLogout={handleLogout}
+            />
+          </>
         ) : (
           ""
         )}
