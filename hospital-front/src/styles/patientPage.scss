@@ -1,18 +1,83 @@
-$grey: #F1F2F7;
+$grey: #f1f2f7;
 
 .patient-table {
-  tbody tr th {
-    text-align: center;
-    background-color: $grey;
+  table-layout: fixed;
+
+  tbody tr {
+    vertical-align: middle;
+
+    th {
+      text-align: center;
+      background-color: $grey;
+      padding: 4px;
+    }
+
+    td {
+      text-align: center;
+      padding: 4px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .patient-table {
+    font-size: 14px;
+
+    th {
+      font-size: 12px;
+      line-height: 20px;
+    }
   }
 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 580px) {
   .patient-table {
+    table-layout: inherit;
+
     th {
       display: none;
     }
-
   }
+}
+
+.table-container {
+  height: 700px;
+  overflow-y: auto;
+
+}
+
+
+.sticky-thead {
+  position: sticky;
+  top: 0;
+  background-color: #f1f2f7;
+
+}
+
+#order-list-table {
+  text-align: center;
+  width: 1200px;
+  font-size: 14px;
+
+
+  thead tr th {
+    background-color: $grey;
+    padding: 5px;
+  }
+
+  tbody tr td {
+    padding: 5px;
+  }
+
+}
+
+
+.menu-title {
+  font-weight: 600;
+
+}
+
+.list-count {
+  font-size: 10px;
 }

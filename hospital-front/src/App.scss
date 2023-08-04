@@ -4,4 +4,12 @@ $bg-color : #F1F2F7;
   background-color: $bg-color;
   height: 100vh;
   width: 100vw;
+  overflow-y: auto;
+}
+
+.App2 {
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
 }

@@ -27,6 +27,7 @@ function InfoBox({
               fontWeight: "bold",
               fontSize: "18px",
             }}
+            className="info-box-title"
           >
             <span>
               {ward}병동 / {room}호
@@ -43,11 +44,14 @@ function InfoBox({
         <Card.Body>
           <Row>
             <Col>NO.{pNum}</Col>
-            <Col>
-              {department}　　{doctor}
+            <Col>{department}</Col>
+            <Col style={{ padding: "0", minWidth: "60px" }}>{doctor}</Col>
+            <Col style={{ minWidth: "40px" }} className="longtext-box">
+              {insurance}
             </Col>
-            <Col>{insurance}</Col>
-            <Col xs={5}>{diagnostic}</Col>
+            <Col xs={11} sm={5} className="longtext-box">
+              {diagnostic}
+            </Col>
           </Row>
         </Card.Body>
       </Card>

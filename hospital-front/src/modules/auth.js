@@ -1,58 +1,25 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isAuthenticated: false,
-  error: null,
+  isLoggedIn: false, //로그인 여부
+  username: null, //의료진 이름
+  employeeno: null, //의료진 코드
 };
 
-// 로그인 요청을 보내는 비동기 액션
-export const login = createAsyncThunk("auth/login", async (credentials) => {
-  try {
-    const response = await axios.post("/api/", credentials);
-    return response.data;
-  } catch (error) {
-    throw Error(error.response.data.message);
-  }
-});
-
-const authSlice = createSlice({
+const userSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginSuccess: (state, action) => {
-      state.isAuthenticated = true;
-      state.user = action.payload;
-      state.error = null;
+    loginSuccess(state, action) {
+      state.isLoggedIn = true;
+      state.username = action.payload.username;
+      state.employeeno = action.payload.employeeno;
     },
-    loginFailure: (state, action) => {
-      state.isAuthenticated = false;
-      state.user = null;
-      state.error = action.payload;
+    logoutSuccess(state) {
+      return initialState;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(login.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
-        state.user = action.payload;
-      })
-      .addCase(login.rejected, (state, action) => {
-        // 로그인 실패 처리 로직을 추가하세요
-      });
   },
 });
 
-export const { loginSuccess, loginFailure } = authSlice.actions;
-
-// // 로그인 요청을 보내는 비동기 액션
-// export const login = createAsyncThunk("auth/login", async (credentials) => {
-//   try {
-//     const response = await axios.post("/api/login", credentials);
-//     return response.data;
-//   } catch (error) {
-//     throw Error(error.response.data.message);
-//   }
-// });
-
-export default authSlice.reducer;
+export const { loginSuccess, logoutSuccess } = userSlice.actions;
+export default userSlice.reducer;

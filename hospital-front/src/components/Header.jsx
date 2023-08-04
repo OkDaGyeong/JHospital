@@ -4,28 +4,57 @@ import { Navbar, Container, Button } from "react-bootstrap";
 import LogoImg from "../images/logoWhite.png";
 import LogoIcon from "../images/logoIcon.png";
 
+import { useNavigate } from "react-router-dom";
+
+import { FiLogOut } from "react-icons/fi";
+
+import { useDispatch } from "react-redux";
+import { logoutSuccess } from "../modules/auth";
+import { setOrderNull } from "../modules/order";
+
+import LogoutConfirmationModal from "./LogoutConfirmationModal";
 function Header() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 560);
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // 컴포넌트 마운트 시에도 한 번 실행하여 초기 값을 설정합니다.
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false); // 모달의 표시 여부
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess());
+    navigate("/");
+  };
+  // 로그아웃 버튼을 누를 때 모달 표시
+  const handleLogoutClick = (event) => {
+    setShowModal(true);
+  };
+
+  // 모달에서 취소 또는 로그아웃 버튼을 누를 때 모달 닫음
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <Navbar className="bg-navy">
       <Container className="bg-navy">
         <Navbar.Brand
-          href="/patient-list"
+          href="/"
           style={{ display: "flex", alignItems: "center" }}
+          onClick={(e) => {
+            dispatch(setOrderNull());
+          }}
         >
           <img
             alt="로고이미지"
@@ -39,7 +68,27 @@ function Header() {
           </span>
         </Navbar.Brand>
 
-        {isSmallScreen ? <Button>logout</Button> : ""}
+        {isSmallScreen ? (
+          <>
+            <Button
+              style={{
+                backgroundColor: "transparent",
+                border: "none",
+              }}
+              className="text-white"
+              onClick={handleLogoutClick}
+            >
+              <FiLogOut />
+            </Button>
+            <LogoutConfirmationModal
+              show={showModal}
+              onClose={handleCloseModal}
+              onLogout={handleLogout}
+            />
+          </>
+        ) : (
+          ""
+        )}
       </Container>
     </Navbar>
   );

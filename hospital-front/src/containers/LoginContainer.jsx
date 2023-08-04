@@ -5,20 +5,23 @@ import LoginForm from "../components/LoginForm";
 import "../styles/loginPage.scss";
 import LogoImg from "../images/logoBlack.png";
 
-import { useDispatch, useSelector } from "react-redux";
-// import { login } from "../modules/auth";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../modules/auth";
+import { setPatientList } from "../modules/patients";
+import { setSearchData } from "../modules/search";
+import { setDoctorList } from "../modules/doctors";
+
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
 function LoginContainer() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); //v6부터 useHistory가 아닌 navigate를 사용해야함
+  const navigate = useNavigate();
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState(false); // 로그인 에러 상태 추가
-  // const loginError = useSelector((state) => state.auth.error);
+  const [loginError, setLoginError] = useState(false); // 로그인 에러 상태
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -35,17 +38,40 @@ function LoginContainer() {
   };
 
   const handleLogin = () => {
-    // 로그인 요청을 서버에 보냅니다.
     axios
-      .post("/viewUser/login", { id: id, password: password })
+      .post("/viewUser/login", {
+        employeeNo: id,
+        password: password,
+      })
       .then((response) => {
         setLoginError(false);
         console.log(response);
         let obj = response.data;
-        console.log(obj.id);
-        console.log(obj.password);
+
+        console.log(response.data);
         if (response.data !== "error") {
-          navigate("/patient-list");
+          const user = {
+            username: response.data.viewUser.nameK,
+            employeeno: response.data.viewUser.employeeNo,
+          };
+          dispatch(loginSuccess(user));
+          const pList = response.data.patientList;
+          dispatch(setPatientList(pList));
+          dispatch(
+            setSearchData({
+              employeeno: user.employeeno,
+              patient: "",
+            })
+          );
+          navigate("/patient-list/" + response.data.employeeno);
+          axios
+            .post("/viewUser/search-dr")
+            .then((response) => {
+              dispatch(setDoctorList(response.data));
+            })
+            .catch((error) => {
+              console.log("의사목록 에러");
+            });
         } else {
           setLoginError(true);
         }

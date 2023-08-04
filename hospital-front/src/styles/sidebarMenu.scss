@@ -1,0 +1,39 @@
+.nav {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.side-menu {
+  font-size: 16px;
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.side-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.side-menu li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.side-menu li:last-child {
+  border-bottom: none;
+}
+
+.sub-menu {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.sub-menu li {
+  padding: 5px 0;
+}

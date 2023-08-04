@@ -11,14 +11,11 @@ $navy: #05438a;
 $secondary: #4b6db4;
 $bs-btn-color: #ffffff;
 
+$info : #0765A8;
+
 * {
   font-family: "S-CoreDream-3Light";
 }
-
-.container {
-  background-color: #F1F2F7;
-}
-
 
 
 .fullWidth {
@@ -42,6 +39,16 @@ $container-max-widths: (
   xl: 1140px,
   xxl: 1320px
 );
+
+
+.list-group-item {
+  padding: 5px !important;
+}
+
+.hr-style {
+  margin: 10px 0;
+
+}
 
 // Bootstrap 임포트
 @import "~bootstrap/scss/bootstrap";

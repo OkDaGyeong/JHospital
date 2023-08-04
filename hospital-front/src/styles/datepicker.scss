@@ -1,0 +1,33 @@
+.react-datepicker__header {
+  background-color: #F1F2F7;
+  border-bottom: none;
+}
+
+.react-datepicker {
+  border: none;
+  box-shadow: 0px 0px 5px 3px rgba($color: #B5C2C9, $alpha: 0.3);
+}
+
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before,
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after {
+  border-top: none;
+  border-bottom-color: #F1F2F7;
+}
+
+.react-datepicker__day--selected {
+  background-color: #20bccc;
+}
+
+#btn-preDate,
+#btn-nextDate {
+  background-color: transparent;
+  color: #20bccc;
+  border: none;
+  border-radius: 5px;
+  font-size: 22px;
+  padding: 0px;
+
+  &:hover {
+    color: #4B6DB4;
+  }
+}

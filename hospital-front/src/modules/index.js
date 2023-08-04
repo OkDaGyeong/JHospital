@@ -1,10 +1,25 @@
 import { combineReducers } from "redux";
-// import counterSlice from "./counterSlice";
-import auth from "./auth";
-const rootReducer = combineReducers({
-  auth,
-  // counterSlice,
-});
-export default rootReducer;
 
-// modules폴더안의 파일은 import rootReducer from './modules';를 적음으로써 불러올 수 있음
+import auth from "./auth";
+import search from "./search";
+import patients from "./patients";
+import order from "./order";
+import doctors from "./doctors";
+
+const appReducer = combineReducers({
+  auth,
+  search,
+  patients,
+  order,
+  doctors,
+});
+
+const rootReducer = (state, action) => {
+  // 로그아웃 액션 시 모든 슬라이스를 초기 상태로 리셋
+  if (action.type === "auth/logoutSuccess") {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
+export default rootReducer;
