@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "../components/Header";
 import { Container } from "react-bootstrap";
 import { Button, Form, Tabs, Tab } from "react-bootstrap";
@@ -6,8 +6,8 @@ import "../styles/patientPage.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import DatePickerCustom from "../components/DatePicker";
-import OrderTable from "../containers/OrderTable";
+// import DatePickerCustom from "../components/DatePicker";
+// import OrderTable from "../containers/OrderTable";
 import InfoTable from "../components/InfoTable";
 import OrderSidebar from "../components/OrderSidbar";
 import ResultSidebar from "../components/ResultSidebar";

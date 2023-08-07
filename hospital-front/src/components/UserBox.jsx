@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Image, Stack, Card } from "react-bootstrap";
 import "../styles/patientListPage.scss";
 import profileImg from "../images/doctor.png";

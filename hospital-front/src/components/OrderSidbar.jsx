@@ -12,12 +12,11 @@ import {
   MdInsertChartOutlined,
   MdDensitySmall,
 } from "react-icons/md";
-import { BiInjection } from "react-icons/bi";
 import { CgPill } from "react-icons/cg";
 import { BsClipboardCheck, BsFileEarmarkPpt } from "react-icons/bs";
 import { useSelector } from "react-redux";
 function OrderSidebar({ patientInfo }) {
-  const selectDate = useSelector((state) => state.order.selectDate);
+  // const selectDate = useSelector((state) => state.order.selectDate);
   const dataList = useSelector((state) => state.order);
 
   // const dataListAll =

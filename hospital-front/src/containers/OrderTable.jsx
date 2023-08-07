@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Table, OverlayTrigger, Tooltip } from "react-bootstrap";
+import React from "react";
+import { Table } from "react-bootstrap";
 import "../styles/patientPage.scss";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 function OrderTable({ dataList }) {
   return (
     <>

@@ -4,11 +4,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import ko from "date-fns/locale/ko";
 
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import "../styles/datepicker.scss";
 const DatePickerCustom = () => {
-  const orderDateList = useSelector((state) => state.order.orderDateList);
-  const selectDate = useSelector((state) => state.order.selectDate);
+  // const orderDateList = useSelector((state) => state.order.orderDateList);
+  // const selectDate = useSelector((state) => state.order.selectDate);
 
   const [startDate, setStartDate] = useState(new Date());
   const systemDate = new Date();
