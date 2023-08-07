@@ -45,8 +45,7 @@ function LoginContainer() {
       })
       .then((response) => {
         setLoginError(false);
-        console.log(response);
-        let obj = response.data;
+        // console.log(response);
 
         console.log(response.data);
         if (response.data !== "error") {
