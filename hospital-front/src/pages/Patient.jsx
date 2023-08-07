@@ -1,22 +1,21 @@
 import React from "react";
 import Header from "../components/Header";
 import { Container } from "react-bootstrap";
-import { Button, Form, Tabs, Tab } from "react-bootstrap";
+import { Button, Tabs, Tab } from "react-bootstrap";
 import "../styles/patientPage.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-// import DatePickerCustom from "../components/DatePicker";
-// import OrderTable from "../containers/OrderTable";
+import DatePickerButton from "../components/DatePickerButton";
+
 import InfoTable from "../components/InfoTable";
 import OrderSidebar from "../components/OrderSidbar";
 import ResultSidebar from "../components/ResultSidebar";
 
 import { setOrderNull } from "../modules/order";
 import { useParams } from "react-router-dom";
-// import Tab1 from "../containers/Tab1";
+
 import { useDispatch } from "react-redux";
-import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import {
   setSelectDate,
   setInternalMedList,
@@ -41,26 +40,32 @@ function Patient() {
   const patientInfo =
     useSelector((state) => state.patients.patientList[patientId]) || [];
 
-  // console.log(patientInfo);
-
   const orderDateList = useSelector((state) => state.order.orderDateList);
   const selectDate = useSelector((state) => state.order.selectDate);
-  const reViewPatient = (patientNo, date, department, code, subCode, sdate) => {
+
+  const patientNo = patientInfo.patientNo;
+  const department = patientInfo.department;
+  const code = patientInfo.code;
+  const subCode = patientInfo.subCode;
+  const date = patientInfo.date;
+  const divisions = {
+    내복: "internalData",
+    외용: "externalData",
+    주사: "injectionData",
+    검사: "examinationData",
+    병리: "pathologyData",
+    수혈: "bloodtransData",
+    방사: "radiationData",
+    초음: "ultrasoundList",
+    CT: "CTData",
+    MR: "MRData",
+    물리: "physicalData",
+  };
+
+  const reViewPatient = (sdate) => {
     dispatch(setSelectDate(sdate));
 
-    const divisions = {
-      내복: "internalData",
-      외용: "externalData",
-      주사: "injectionData",
-      검사: "examinationData",
-      병리: "pathologyData",
-      수혈: "bloodtransData",
-      방사: "radiationData",
-      초음: "ultrasoundList",
-      CT: "CTData",
-      MR: "MRData",
-      물리: "physicalData",
-    };
+    //데이터 받아옴
     axios
       .get("/viewPatient/detail-order", {
         params: {
@@ -73,7 +78,6 @@ function Patient() {
         },
       })
       .then((response) => {
-        console.log("이거실행됨");
         console.log(response.data);
         const categorizedData = {};
         categorizedData["otherData"] = [];
@@ -109,35 +113,6 @@ function Patient() {
       });
   };
 
-  const patientNo = patientInfo.patientNo;
-  const department = patientInfo.department;
-  const code = patientInfo.code;
-  const subCode = patientInfo.subCode;
-  const date = patientInfo.date;
-
-  const handleDateChange = (event) => {
-    const selectedDate = event.target.value;
-    console.log("이거까진 됨 " + selectedDate);
-    reViewPatient(patientNo, date, department, code, subCode, selectedDate);
-  };
-
-  const handleNextDate = () => {
-    const selectedIndex = orderDateList.indexOf(selectDate);
-    if (selectedIndex > 0) {
-      const previousDate = orderDateList[selectedIndex - 1];
-      dispatch(setSelectDate(previousDate));
-      reViewPatient(patientNo, date, department, code, subCode, previousDate);
-    }
-  };
-
-  const handlePreviousDate = () => {
-    const selectedIndex = orderDateList.indexOf(selectDate);
-    if (selectedIndex < orderDateList.length - 1) {
-      const nextDate = orderDateList[selectedIndex + 1];
-      dispatch(setSelectDate(nextDate));
-      reViewPatient(patientNo, date, department, code, subCode, nextDate);
-    }
-  };
   return (
     <div className="App2">
       <Header />
@@ -160,34 +135,12 @@ function Patient() {
         <hr />
 
         <div style={{ height: "800px" }}>
-          {/* <DatePickerCustom /> */}
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              flexDirection: "row-reverse",
-              gap: "10px",
-            }}
-          >
-            <button id="btn-nextDate" onClick={handleNextDate}>
-              <AiFillCaretRight />
-            </button>
-            <Form.Select
-              onChange={handleDateChange}
-              value={selectDate}
-              style={{ width: "140px" }}
-            >
-              {orderDateList.map((date) => (
-                <option key={date} value={date}>
-                  {date.substring(0, 4)}/{date.substring(4, 6)}/
-                  {date.substring(6, 8)}
-                </option>
-              ))}
-            </Form.Select>{" "}
-            <button id="btn-preDate" onClick={handlePreviousDate}>
-              <AiFillCaretLeft />
-            </button>
-          </div>
+          <DatePickerButton
+            orderDateList={orderDateList}
+            selectDate={selectDate}
+            reViewPatient={reViewPatient}
+          />
+
           <Tabs
             defaultActiveKey="pState"
             id="uncontrolled-tab-example"
